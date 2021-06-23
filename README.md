@@ -2,7 +2,7 @@
 
 _This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
 
-## Get started
+<h2 style="font-family='Helvetica'; font-size=15px; font-weight=bold; color=grey;">⭐️ Get started</h2>
 
 To run this project locally, install the dependencies and run the local server:
 
@@ -14,7 +14,7 @@ npm start
 Alternatively, you may use [Yarn](https://http://yarnpkg.com/):
 
 ```sh
-yarn
+yarn install
 yarn start
 ```
 
