@@ -1,0 +1,55 @@
+@import "../SCSS/variables.scss";
+
+.headerUp {
+    width: 100%;
+}
+
+.header-wrapper {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        display: flex;
+        align-items: center;
+
+        li {
+            margin: 0 0.5rem;
+            font-weight: bold;
+            .design {
+                display: flex;
+                align-items: center;
+            }
+            .fa-palette {
+                margin-right: 0.2rem;
+            }
+        }
+        .promo {
+            color: $second-color;
+        }
+    }
+
+    .logo {
+        width: 10%;
+    }
+
+    .search-wrapper {
+        border-left: 1px solid $third-color;
+        width: 10%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .search-placeholder {
+            color: $main-color;
+            font-weight: 200;
+            font-size: 1rem;
+            margin-left: 1rem;
+        }
+        svg {
+            width: 30px;
+            margin-left: 1rem;
+        }
+    }
+}

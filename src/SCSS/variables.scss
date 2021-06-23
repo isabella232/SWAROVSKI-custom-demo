@@ -1,0 +1,39 @@
+// COLORS
+
+$main-color: #000;
+$second-color: #de0b00;
+$third-color: #e2e2e5;
+
+// FONTS
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+// VARIABLES
+
+$main-font: "Oswald", sans-serif;
+
+//MAIN STYLING
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    font-family: $main-font;
+    color: $main-color;
+}
+
+a {
+    text-decoration: none;
+}
+
+li,
+ul {
+    list-style: none;
+    font-family: $main-font;
+    color: $main-color;
+}
