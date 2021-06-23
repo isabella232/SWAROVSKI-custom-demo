@@ -12,6 +12,7 @@ import {
 //COMPONENTS
 import CustomHits from './Hits'
 import CustomFilters from './Filters'
+import CustomSearchBox from './SearchBox'
 
 const SearchResults = ({ searchVisible }) => {
     const searchClient = algoliasearch(
@@ -26,12 +27,7 @@ const SearchResults = ({ searchVisible }) => {
                 indexName="RayBan_FB"
             >
                 <div className="search-panel">
-                    <SearchBox
-                        className="searchbox"
-                        translations={{
-                            placeholder: '',
-                        }}
-                    />
+                    <CustomSearchBox />
                     <div className="searchPanel-results">
                         {/* <Hits hitComponent={Hit} /> */}
 
