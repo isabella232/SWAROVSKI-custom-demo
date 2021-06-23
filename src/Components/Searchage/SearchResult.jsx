@@ -16,8 +16,8 @@ import CustomSearchBox from './SearchBox'
 
 const SearchResults = ({ searchVisible }) => {
     const searchClient = algoliasearch(
-        'JDBD6EJM33',
-        '0fe54b2e3991d370c91376981aff9d48'
+        window.appID,
+        window.key
     );
     console.log(searchVisible)
     return (
