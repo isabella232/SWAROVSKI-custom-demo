@@ -17,7 +17,8 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-instantsearch-dom": "6.11.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "rheostat": "^4.1.1"
   },
   "devDependencies": {
     "eslint": "5.6.0",
