@@ -39,28 +39,38 @@
 }
 
 .hidden-filters {
-  animation: fadeFiltersOut 0.5s forwards ease-in-out;
+    animation: fadeFiltersOut 0.5s forwards ease-in-out;
 }
 
 @keyframes fadeFilters {
-  0% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  100%{
-    visibility: visible;
-    opacity: 1;
-  }
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 @keyframes fadeFiltersOut {
-  0% {
-    visibility: visible;
-    opacity: 1;
-  }
-  100%{
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-  }
+    0% {
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+    }
+}
+
+// Rheostat
+.DefaultBackground {
+    border: none !important;
+    background-color: white !important;
+}
+
+.DefaultProgressBar_progressBar {
+    background-color: $grey-border-buttons !important;
 }
