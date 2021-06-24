@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
     connectRefinementList,
     connectHierarchicalMenu,
-    connectRange
+    connectRange,
 } from 'react-instantsearch-dom';
 
 // Prerequisite: install rheostat@4
