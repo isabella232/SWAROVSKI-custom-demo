@@ -14,10 +14,10 @@ import 'rheostat/css/rheostat.css';
 const CustomFilters = () => {
     return (
         <div className="filters-wrapper">
-            <HierarchicalMenu
-                attributes={['categorylvl1', 'categorylvl2', 'categorylvl3']}
-                name="Categories"
-            />
+
+            {/* <HierarchicalMenu attributes={["categorylvl1", "categorylvl2", "categorylvl3"]}
+                name="Categories" /> */}
+
             <CustomRefinementList attribute="color" />
             <CustomSizeRefinementList attribute="size" />
             <CustomRangeSlider attribute="price" min={10} max={500} />

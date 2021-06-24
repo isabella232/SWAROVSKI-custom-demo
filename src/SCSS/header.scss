@@ -17,7 +17,26 @@
 
         li {
             margin: 0 0.5rem;
-            font-weight: bold;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                background-color: black;
+                height: 4px;
+                width: 100%;
+                bottom: -0.5rem;
+                transform-origin: 100% 0;
+                transform: scaleX(0);
+                transition: transform 0.4s;
+            }
+
+            &:hover::before {
+                transform-origin: 0 0;
+                transform: scaleX(1);
+            }
             .design {
                 display: flex;
                 align-items: center;
