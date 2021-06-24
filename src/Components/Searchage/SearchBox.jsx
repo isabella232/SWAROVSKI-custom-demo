@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import {
-    connectSearchBox
-} from 'react-instantsearch-dom'
+import { connectSearchBox, VoiceSearch } from 'react-instantsearch-dom';
 
 const SearchBox = ({ currentRefinement, refine }) => {
     return (
@@ -13,9 +11,10 @@ const SearchBox = ({ currentRefinement, refine }) => {
                 onChange={event => refine(event.currentTarget.value)}
                 placeholder="Search..."
             />
+            <VoiceSearch searchAsYouSpeak={false} />
         </div>
     );
-}
+};
 
 const CustomSearchBox = connectSearchBox(SearchBox);
 
