@@ -20,6 +20,7 @@ const App = () => {
       <Header searchVisible={searchVisible} setSearchVisible={setSearchVisible} catSunglasses={catSunglasses} setCatSunglasses={setCatSunglasses} catEyeGlasses={catEyeGlasses} setCatEyeGlasses={setCatEyeGlasses} />
       <SearchResults searchVisible={searchVisible} catSunglasses={catSunglasses} catEyeGlasses={catEyeGlasses} />
       <Homepage searchVisible={searchVisible} />
+
     </div>
   );
 }

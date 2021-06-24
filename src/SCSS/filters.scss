@@ -1,5 +1,5 @@
-@import './mixin.scss';
-@import './variables.scss';
+@import "./mixin.scss";
+@import "./variables.scss";
 
 // Filters on Left
 
@@ -36,12 +36,65 @@
     }
 }
 
+.filterBtn {
+    display: -webkit-flex;
+    display: flex;
+    margin: -2.5rem 0;
+    cursor: pointer;
+    width: 100%;
+    position: absolute;
+
+    :nth-child(1) {
+        margin-right: 0.5rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+}
+
+.hideWrapperFilter {
+    animation: hideWrapper 0.3s forwards ease-in-out;
+}
+
+.showWrapperFilter {
+    animation: showWrapper 0.3s forwards ease-in-out;
+}
+
 .active-filters {
     animation: fadeFilters 0.5s forwards ease-in-out;
 }
 
 .hidden-filters {
     animation: fadeFiltersOut 0.5s forwards ease-in-out;
+}
+
+@keyframes hideWrapper {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(-100, 0, 0);
+        width: 0;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+}
+@keyframes showWrapper {
+    0% {
+        opacity: 0;
+        transform: translate3d(-100, 0, 0);
+        width: 0;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        width: 20%;
+    }
 }
 
 @keyframes fadeFilters {

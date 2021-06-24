@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 
@@ -19,8 +19,14 @@ import CustomFilters from './Filters';
 import CustomSearchBox from './SearchBox';
 
 const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
-    const searchClient = algoliasearch(window.appID, window.key);
-    console.log(searchVisible);
+
+    const searchClient = algoliasearch(
+        window.appID,
+        window.key
+    );
+    const [filterAnim, setFilterAnim] = useState(true)
+
+
     return (
         <div
             className={`container ${
@@ -54,16 +60,34 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     </div>
                     {catSunglasses ? (
                         <div className="searchPanel-results">
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                             <Configure filters="categorylvl3:Sunglasses" />
                             <CustomFilters />
                             <CustomHits />
+
+                        </div>) :
+                        <div className="searchPanel-results">
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                            <CustomFilters filterAnim={filterAnim} />
+                            <CustomHits />
+
                         </div>
                     ) : (
                         <div className="searchPanel-results">
+
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                            <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
                             <CustomFilters />
                             <CustomHits />
-                        </div>
-                    )}
+                        </div>) : (
+                        <div className="searchPanel-results">
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                            <CustomFilters />
+                            <CustomHits />
+                        </div>)}
+
+
+
                     <div className="pagination">
                         <Pagination />
                     </div>
@@ -73,18 +97,12 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
     );
 };
 
-// function Hit(props) {
-//     return (
-//         <article>
-//             <h1>
-//                 <Highlight attribute="title" hit={props.hit} />
-//             </h1>
-//         </article>
-//     );
-// }
-
-// Hit.propTypes = {
-//     hit: PropTypes.object.isRequired,
-// };
+const FilterBtn = ({ filterAnim, setFilterAnim }) => {
+    return (
+        <div className="filterBtn" onClick={() => {
+            setFilterAnim(!filterAnim)
+        }}><p>NAVIGATION & FILTERS</p>{filterAnim ? (<p>-</p>) : (<p>+</p>)}</div>
+    )
+}
 
 export default SearchResults;
