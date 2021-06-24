@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import './variables.scss';
 
 .container {
     width: 90%;
@@ -30,6 +30,34 @@
         }
     }
 }
+
+// VOICESEARCH
+.voiceSearch-wrapper {
+    width: 100%;
+
+    .ais-VoiceSearch {
+        position: absolute;
+        right: 3rem;
+        top: 30%;
+        cursor: pointer;
+        .ais-VoiceSearch-button {
+            position: unset;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+}
+.ais-VoiceSearch-status {
+    display: none;
+}
+
+// .ais-VoiceSearch-button svg {
+//     position: absolute;
+//     top: 0;
+//     width: 20px;
+//     height: 20px;
+// }
 
 //SEARCHRESULT
 
