@@ -1,0 +1,76 @@
+@import './mixin.scss';
+@import './variables.scss';
+
+.filters-content {
+    width: 100%;
+    .title {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+            @include title-filter;
+        }
+    }
+    .filter-list-content {
+        width: 100%;
+        .filter-list {
+            width: 100%;
+            p {
+                font-size: 16px;
+            }
+            .button-filter {
+                @include btn-filter;
+            }
+            .button-filter:hover {
+                @include btn-filter-hover;
+            }
+        }
+    }
+    .line {
+        border-bottom: 1px solid $grey-border-buttons;
+        width: 70%;
+        margin: 1em auto 1em auto;
+    }
+}
+
+.active-filters {
+    animation: fadeFilters 0.5s forwards ease-in-out;
+}
+
+.hidden-filters {
+    animation: fadeFiltersOut 0.5s forwards ease-in-out;
+}
+
+@keyframes fadeFilters {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeFiltersOut {
+    0% {
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+    }
+}
+
+// Rheostat
+.DefaultBackground {
+    border: none !important;
+    background-color: white !important;
+}
+
+.DefaultProgressBar_progressBar {
+    background-color: $grey-border-buttons !important;
+}

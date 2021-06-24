@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     connectRefinementList,
@@ -20,92 +20,146 @@ const CustomFilters = () => {
 
             <CustomRefinementList attribute="color" />
             <CustomSizeRefinementList attribute="size" />
-            <CustomRangeSlider attribute="price" min={10} max={500} />
+            <CustomRangeSlider attribute="price" min={10} max={550} />
         </div>
     );
 };
 
 const CatFilter = ({ items, currentRefinement, refine, createURL }) => {
-    console.log(items);
+    const [category, setcategory] = useState(true);
     return (
-        <ul>
-            {items.map(item => (
-                <li key={item.label}>
-                    <a
-                        href={createURL(item.value)}
-                        style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                        onClick={event => {
-                            event.preventDefault();
-                            refine(item.value);
-                        }}
-                    >
-                        {item.label} ({item.count})
-                    </a>
-                    {item.items && (
-                        <HierarchicalMenu
-                            items={item.items}
-                            refine={refine}
-                            createURL={createURL}
-                        />
-                    )}
-                </li>
-            ))}
-        </ul>
+        <div className="filters-content">
+            <div
+                onClick={() => {
+                    setcategory(!category);
+                }}
+                className="title"
+            >
+                <h3>Category</h3>
+                <p>-</p>
+            </div>
+            <ul
+                className={`filter-list-content ${
+                    category ? 'active-filters' : 'hidden-filters'
+                }`}
+            >
+                {items.map(item => (
+                    <li className="filter-list" key={item.label}>
+                        <a
+                            className="button-filter"
+                            href={createURL(item.value)}
+                            style={{ fontWeight: item.isRefined ? 'bold' : '' }}
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                        {item.items && (
+                            <HierarchicalMenu
+                                items={item.items}
+                                refine={refine}
+                                createURL={createURL}
+                            />
+                        )}
+                    </li>
+                ))}
+            </ul>
+            <div className="line"></div>
+        </div>
     );
 };
 
 const HierarchicalMenu = connectHierarchicalMenu(CatFilter);
 
 // Color Filter
-const ColorRefinementList = ({ items, refine }) => (
-    <ul>
-        {items.map(item => (
-            <li key={item.label}>
-                <a
-                    href="#"
-                    style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                    onClick={event => {
-                        event.preventDefault();
-                        refine(item.value);
-                    }}
-                >
-                    {item.label} ({item.count})
-                </a>
-            </li>
-        ))}
-    </ul>
-);
+const ColorRefinementList = ({ items, refine }) => {
+    const [colors, setColors] = useState(true);
+    return (
+        <div className="filters-content">
+            <div
+                className="title"
+                onClick={() => {
+                    setColors(!colors);
+                }}
+            >
+                <h3>Colors</h3>
+                <p>-</p>
+            </div>
+            <ul
+                className={`filter-list-content ${
+                    colors ? 'active-filters' : 'hidden-filters'
+                }`}
+            >
+                {items.map(item => (
+                    <li className="filter-list" key={item.label}>
+                        <a
+                            className="button-filter"
+                            href="#"
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            <div className="line"></div>
+        </div>
+    );
+};
 
 const CustomRefinementList = connectRefinementList(ColorRefinementList);
 
 // Size Filter
 
-const SizeRefinementList = ({ items, refine }) => (
-    <ul>
-        {items.map(item => (
-            <li key={item.label}>
-                <a
-                    href="#"
-                    style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                    onClick={event => {
-                        event.preventDefault();
-                        refine(item.value);
-                    }}
-                >
-                    {item.label} ({item.count})
-                </a>
-            </li>
-        ))}
-    </ul>
-);
+const SizeRefinementList = ({ items, refine }) => {
+    const [size, setSize] = useState(true);
+    return (
+        <div className="filters-content">
+            <div
+                onClick={() => {
+                    setSize(!size);
+                }}
+                className="title"
+            >
+                <h3>Size</h3>
+                <p>-</p>
+            </div>
+            <ul
+                className={`filter-list-content ${
+                    size ? 'active-filters' : 'hidden-filters'
+                }`}
+            >
+                {items.map(item => (
+                    <li className="filter-list" key={item.label}>
+                        <a
+                            className="button-filter"
+                            href="#"
+                            style={{ fontWeight: item.isRefined ? 'bold' : '' }}
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            <div className="line"></div>
+        </div>
+    );
+};
 
 const CustomSizeRefinementList = connectRefinementList(SizeRefinementList);
 
 // Price Filter
 
 const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
-    console.log('MIN', min);
-    console.log('MAX', max);
     const [stateMin, setStateMin] = React.useState(min);
     const [stateMax, setStateMax] = React.useState(max);
 
@@ -132,26 +186,32 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
     };
 
     return (
-        <Rheostat
-            min={min}
-            max={max}
-            values={[currentRefinement.min, currentRefinement.max]}
-            onChange={onChange}
-            onValuesUpdated={onValuesUpdated}
-        >
-            <div
-                className="rheostat-marker rheostat-marker--large"
-                style={{ left: 0 }}
-            >
-                <div className="rheostat-value">{stateMin}</div>
+        <div className="filters-content">
+            <div className="title" style={{ marginBottom: '1em' }}>
+                <h3>Price</h3>
+                <p>-</p>
             </div>
-            <div
-                className="rheostat-marker rheostat-marker--large"
-                style={{ right: 0 }}
+            <Rheostat
+                min={min}
+                max={max}
+                values={[currentRefinement.min, currentRefinement.max]}
+                onChange={onChange}
+                onValuesUpdated={onValuesUpdated}
             >
-                <div className="rheostat-value">{stateMax}</div>
-            </div>
-        </Rheostat>
+                <div
+                    className="rheostat-marker rheostat-marker--large"
+                    style={{ left: 0 }}
+                >
+                    <div className="rheostat-value">{stateMin}</div>
+                </div>
+                <div
+                    className="rheostat-marker rheostat-marker--large"
+                    style={{ right: 0 }}
+                >
+                    <div className="rheostat-value">{stateMax}</div>
+                </div>
+            </Rheostat>
+        </div>
     );
 };
 
