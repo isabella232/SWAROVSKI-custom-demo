@@ -7,6 +7,7 @@ import {
     SearchBox,
     Pagination,
     Highlight,
+    Configure
 } from 'react-instantsearch-dom';
 
 //COMPONENTS
@@ -14,27 +15,43 @@ import CustomHits from './Hits'
 import CustomFilters from './Filters'
 import CustomSearchBox from './SearchBox'
 
-const SearchResults = ({ searchVisible }) => {
+const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
     const searchClient = algoliasearch(
         window.appID,
         window.key
     );
     console.log(searchVisible)
     return (
-        <div className={`container ${searchVisible ? "active" : "hidden"}`}>
+        <div className={`container ${searchVisible || catSunglasses || catEyeGlasses ? "active" : "hidden"}`}>
             <InstantSearch
                 searchClient={searchClient}
                 indexName="RayBan_FB"
             >
                 <div className="search-panel">
                     <CustomSearchBox />
-                    <div className="searchPanel-results">
-                        {/* <Hits hitComponent={Hit} /> */}
+                    {catSunglasses ? (
+                        <div className="searchPanel-results">
+                            <Configure filters="categorylvl3:Sunglasses" />
+                            <CustomFilters />
+                            <CustomHits />
+                        </div>) :
+                        <div className="searchPanel-results">
+                            <CustomFilters />
+                            <CustomHits />
+                        </div>
+                    }
+                    {catEyeGlasses ? (
+                        <div className="searchPanel-results">
+                            <Configure filters="google_product_category:Health & Beauty > Personal Care > Vision Care > Eyeglasses" />
+                            <CustomFilters />
+                            <CustomHits />
+                        </div>) : (
+                        <div className="searchPanel-results">
+                            <CustomFilters />
+                            <CustomHits />
+                        </div>)}
 
-                        <CustomFilters />
-                        <CustomHits />
 
-                    </div>
                     <div className="pagination">
                         <Pagination />
                     </div>

@@ -7,7 +7,8 @@ import headerUp from '../../Assets/Images/headerUp.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette } from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({ setSearchVisible, searchVisible }) => {
+const Header = ({ setSearchVisible, searchVisible, setCatSunglasses, catSunglasses, catEyeGlasses, setCatEyeGlasses }) => {
+    console.log(catSunglasses)
 
     return (
         <header className="header">
@@ -15,8 +16,8 @@ const Header = ({ setSearchVisible, searchVisible }) => {
             <div className="header-wrapper">
                 <img src={logo} alt="logo" className="logo" />
                 <ul>
-                    <li>SUNGLASSES</li>
-                    <li>EYEGLASSES</li>
+                    <li onClick={() => setCatSunglasses(!catSunglasses)}>SUNGLASSES</li>
+                    <li onClick={() => setCatEyeGlasses(!catEyeGlasses)}>EYEGLASSES</li>
                     <li className="design"><FontAwesomeIcon icon={faPalette} /><span>DESIGN YOUR OWN</span></li>
                     <li>PRESCRIPTION</li>
                     <li>OUR ICONS</li>

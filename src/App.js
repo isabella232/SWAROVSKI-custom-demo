@@ -13,10 +13,12 @@ import Homepage from './Components/Homepage/Homepage'
 
 const App = () => {
   const [searchVisible, setSearchVisible] = useState(false)
+  const [catSunglasses, setCatSunglasses] = useState(false)
+  const [catEyeGlasses, setCatEyeGlasses] = useState(false)
   return (
     <div>
-      <Header searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
-      <SearchResults searchVisible={searchVisible} />
+      <Header searchVisible={searchVisible} setSearchVisible={setSearchVisible} catSunglasses={catSunglasses} setCatSunglasses={setCatSunglasses} catEyeGlasses={catEyeGlasses} setCatEyeGlasses={setCatEyeGlasses} />
+      <SearchResults searchVisible={searchVisible} catSunglasses={catSunglasses} catEyeGlasses={catEyeGlasses} />
       <Homepage searchVisible={searchVisible} />
     </div>
   );

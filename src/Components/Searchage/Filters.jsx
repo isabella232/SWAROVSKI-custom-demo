@@ -9,8 +9,8 @@ import {
 const CustomFilters = () => {
     return (
         <div className="filters-wrapper">
-            <HierarchicalMenu attributes={["categorylvl1", "categorylvl2", "categorylvl3"]}
-                name="Categories" />
+            {/* <HierarchicalMenu attributes={["categorylvl1", "categorylvl2", "categorylvl3"]}
+                name="Categories" /> */}
             <CustomRefinementList attribute="color" />
         </div>);
 }
