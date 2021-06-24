@@ -18,7 +18,7 @@ const SearchBox = ({ currentRefinement, refine }) => {
                     onChange={event => refine(event.currentTarget.value)}
                     placeholder="Search..."
                 />
-                <VoiceSearch searchAsYouSpeak={false} />
+                <VoiceSearch searchAsYouSpeak={false} language={'en-US'} />
             </div>
             <CustomCurrentRefinements
                 transformItems={items =>

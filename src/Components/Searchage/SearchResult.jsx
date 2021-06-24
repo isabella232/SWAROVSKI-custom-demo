@@ -29,35 +29,14 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
 
     return (
         <div
-            className={`container ${
-                searchVisible || catSunglasses || catEyeGlasses
-                    ? 'active'
-                    : 'hidden'
-            }`}
+            className={`container ${searchVisible || catSunglasses || catEyeGlasses
+                ? 'active'
+                : 'hidden'
+                }`}
         >
             <InstantSearch searchClient={searchClient} indexName="RayBan_FB">
                 <div className="search-panel">
                     <CustomSearchBox />
-                    <div className="sort-and-stat">
-                        <Stats />
-                        <SortBy
-                            defaultRefinement="RayBan_FB"
-                            items={[
-                                {
-                                    value: 'RayBan_FB',
-                                    label: 'Relevancy'
-                                },
-                                {
-                                    value: 'RayBan_FB_price_dsc',
-                                    label: 'Price Desc'
-                                },
-                                {
-                                    value: 'RayBan_FB_price_asc',
-                                    label: 'Price Asc.'
-                                }
-                            ]}
-                        />
-                    </div>
                     {catSunglasses ? (
                         <div className="searchPanel-results">
                             <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
@@ -65,26 +44,28 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                             <CustomFilters />
                             <CustomHits />
 
-                        </div>) :
+                        </div>) : (
                         <div className="searchPanel-results">
                             <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                             <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
 
                         </div>
-                    ) : (
-                        <div className="searchPanel-results">
+                    )
+                    }
+                    {catEyeGlasses ? (<div className="searchPanel-results">
+                        <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                        <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
+                        <CustomFilters />
+                        <CustomHits />
+                    </div>) : (<div className="searchPanel-results">
+                        <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                        <CustomFilters />
+                        <CustomHits />
+                    </div>)}
 
-                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
-                            <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
-                            <CustomFilters />
-                            <CustomHits />
-                        </div>) : (
-                        <div className="searchPanel-results">
-                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
-                            <CustomFilters />
-                            <CustomHits />
-                        </div>)}
+
+
 
 
 

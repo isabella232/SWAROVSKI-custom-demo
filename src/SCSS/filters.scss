@@ -41,7 +41,6 @@
     display: flex;
     margin: -2.5rem 0;
     cursor: pointer;
-    width: 100%;
     position: absolute;
 
     :nth-child(1) {
@@ -134,9 +133,11 @@
 .refinement-content {
     display: flex;
     justify-content: center;
-    width: 70%;
+    position: absolute;
+    width: 100%;
     margin: 0 auto;
     height: auto;
+    transform: translateX(0%);
     .refinement-item {
         display: flex;
         align-items: center;

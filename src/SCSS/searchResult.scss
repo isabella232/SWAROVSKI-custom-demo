@@ -1,10 +1,14 @@
-@import './variables.scss';
-@import './mixin.scss';
+@import "./variables.scss";
+@import "./mixin.scss";
 
 .container {
     width: 90%;
     margin: 0 auto;
     display: none;
+}
+
+.search-panel {
+    position: relative;
 }
 
 // SEARCHBOX
@@ -58,13 +62,15 @@
 .sort-and-stat {
     display: flex;
     justify-content: space-between;
-    width: 76%;
-    margin: auto 0 auto auto;
+    align-items: center;
+    width: 90%;
+    margin: -1rem auto 2rem auto;
     .ais-Stats-text {
         color: $title-filters-color;
     }
 }
 .ais-SortBy-select {
+    @include btn-filter;
     .ais-SortBy-option {
         color: $title-filters-color;
         @include title-filter;
