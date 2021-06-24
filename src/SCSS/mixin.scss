@@ -1,0 +1,18 @@
+// Mixins
+@import "./variables.scss";
+
+// Buttons on search filter
+
+@mixin btn-filter {
+ border: 1px solid $grey-border-buttons;
+  text-decoration: none;
+  color: $main-color;
+  width: 100%;
+}
+
+// Title of each filter
+@mixin title-filter{
+  font-size: 14px;
+  color: $title-filters-color;
+  text-transform: uppercase;
+}

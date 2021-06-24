@@ -26,7 +26,6 @@ const CustomFilters = () => {
 };
 
 const CatFilter = ({ items, currentRefinement, refine, createURL }) => {
-    console.log(items);
     return (
         <ul>
             {items.map(item => (
@@ -58,22 +57,28 @@ const HierarchicalMenu = connectHierarchicalMenu(CatFilter);
 
 // Color Filter
 const ColorRefinementList = ({ items, refine }) => (
-    <ul>
-        {items.map(item => (
-            <li key={item.label}>
-                <a
-                    href="#"
-                    style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                    onClick={event => {
-                        event.preventDefault();
-                        refine(item.value);
-                    }}
-                >
-                    {item.label} ({item.count})
-                </a>
-            </li>
-        ))}
-    </ul>
+    <div className="filters-content">
+        <div className="title">
+            <h3>Colors</h3>
+            <p>-</p>
+        </div>
+        <ul className="filter-list-content">
+            {items.map(item => (
+                <li className="filter-list" key={item.label}>
+                    <a
+                        className="button-filter"
+                        href="#"
+                        onClick={event => {
+                            event.preventDefault();
+                            refine(item.value);
+                        }}
+                    >
+                        {item.label} ({item.count})
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </div>
 );
 
 const CustomRefinementList = connectRefinementList(ColorRefinementList);
@@ -104,8 +109,6 @@ const CustomSizeRefinementList = connectRefinementList(SizeRefinementList);
 // Price Filter
 
 const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
-    console.log('MIN', min);
-    console.log('MAX', max);
     const [stateMin, setStateMin] = React.useState(min);
     const [stateMax, setStateMax] = React.useState(max);
 

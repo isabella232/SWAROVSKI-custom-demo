@@ -1,0 +1,29 @@
+@import './mixin.scss';
+@import './variables.scss';
+
+.filters-content {
+    width: 100%;
+    background-color: aqua;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        h3 {
+            @include title-filter;
+        }
+    }
+    .filter-list-content {
+        width: 100%;
+        background-color: brown;
+        .filter-list {
+            width: 100%;
+            background-color: coral;
+            p {
+                font-size: 16px;
+            }
+            .button-filter {
+                background-color: aqua;
+                @include btn-filter;
+            }
+        }
+    }
+}
