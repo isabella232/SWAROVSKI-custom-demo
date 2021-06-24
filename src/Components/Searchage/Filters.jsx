@@ -11,9 +11,11 @@ import 'rheostat/initialize';
 import Rheostat from 'rheostat';
 import 'rheostat/css/rheostat.css';
 
-const CustomFilters = () => {
+const CustomFilters = ({ filterAnim }) => {
+
     return (
-        <div className="filters-wrapper">
+        <div className={`filters-wrapper ${filterAnim ? "showWrapperFilter" : "hideWrapperFilter"}`}>
+
 
             {/* <HierarchicalMenu attributes={["categorylvl1", "categorylvl2", "categorylvl3"]}
                 name="Categories" /> */}
@@ -22,6 +24,7 @@ const CustomFilters = () => {
             <CustomSizeRefinementList attribute="size" />
             <CustomRangeSlider attribute="price" min={10} max={550} />
         </div>
+
     );
 };
 
@@ -39,9 +42,8 @@ const CatFilter = ({ items, currentRefinement, refine, createURL }) => {
                 <p>-</p>
             </div>
             <ul
-                className={`filter-list-content ${
-                    category ? 'active-filters' : 'hidden-filters'
-                }`}
+                className={`filter-list-content ${category ? 'active-filters' : 'hidden-filters'
+                    }`}
             >
                 {items.map(item => (
                     <li className="filter-list" key={item.label}>
@@ -88,9 +90,8 @@ const ColorRefinementList = ({ items, refine }) => {
                 <p>-</p>
             </div>
             <ul
-                className={`filter-list-content ${
-                    colors ? 'active-filters' : 'hidden-filters'
-                }`}
+                className={`filter-list-content ${colors ? 'active-filters' : 'hidden-filters'
+                    }`}
             >
                 {items.map(item => (
                     <li className="filter-list" key={item.label}>
@@ -130,9 +131,8 @@ const SizeRefinementList = ({ items, refine }) => {
                 <p>-</p>
             </div>
             <ul
-                className={`filter-list-content ${
-                    size ? 'active-filters' : 'hidden-filters'
-                }`}
+                className={`filter-list-content ${size ? 'active-filters' : 'hidden-filters'
+                    }`}
             >
                 {items.map(item => (
                     <li className="filter-list" key={item.label}>

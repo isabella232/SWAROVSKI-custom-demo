@@ -11,7 +11,7 @@ import footer from '../../Assets/Images/footer.png';
 const Homepage = ({ searchVisible }) => {
     console.log(searchVisible, "home")
     return (
-        <div className={`homepage-wrapper ${searchVisible ? "hidden" : "active"}`}>
+        <div className="homepage-wrapper">
             <div>
                 <img src={headerBand} />
             </div>

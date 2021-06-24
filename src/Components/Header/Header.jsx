@@ -16,8 +16,16 @@ const Header = ({ setSearchVisible, searchVisible, setCatSunglasses, catSunglass
             <div className="header-wrapper">
                 <img src={logo} alt="logo" className="logo" />
                 <ul>
-                    <li onClick={() => setCatSunglasses(!catSunglasses)}>SUNGLASSES</li>
-                    <li onClick={() => setCatEyeGlasses(!catEyeGlasses)}>EYEGLASSES</li>
+                    <li onClick={() => {
+                        setCatSunglasses(true)
+                        setSearchVisible(true)
+                    }}>
+                        SUNGLASSES
+                    </li>
+                    <li onClick={() => {
+                        setCatEyeGlasses(true)
+                        setSearchVisible(true)
+                    }}>EYEGLASSES</li>
                     <li className="design"><FontAwesomeIcon icon={faPalette} /><span>DESIGN YOUR OWN</span></li>
                     <li>PRESCRIPTION</li>
                     <li>OUR ICONS</li>
@@ -31,7 +39,7 @@ const Header = ({ setSearchVisible, searchVisible, setCatSunglasses, catSunglass
                     <p className="search-placeholder">Search ...</p>
                 </div>
             </div>
-        </header>
+        </header >
     );
 }
 
