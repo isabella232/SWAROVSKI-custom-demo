@@ -1,6 +1,8 @@
 @import './mixin.scss';
 @import './variables.scss';
 
+// Filters on Left
+
 .filters-content {
     width: 100%;
     .title {
@@ -73,4 +75,32 @@
 
 .DefaultProgressBar_progressBar {
     background-color: $grey-border-buttons !important;
+}
+
+// Current Refinement
+.refinement-content {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    margin: 0 auto;
+    height: auto;
+    .refinement-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+        h3 {
+            @include title-filter;
+        }
+        .refinement-results {
+            display: flex;
+            .refinement-filter {
+                background-color: #f2f2f2;
+                color: $title-filters-color;
+                text-decoration: none;
+                margin: 0 0.5em;
+                border-radius: 0.2em;
+                padding: 0.5em 1em;
+            }
+        }
+    }
 }
