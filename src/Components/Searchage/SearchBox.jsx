@@ -20,7 +20,11 @@ const SearchBox = ({ currentRefinement, refine }) => {
                 />
                 <VoiceSearch searchAsYouSpeak={false} />
             </div>
-            <CustomCurrentRefinements />
+            <CustomCurrentRefinements
+                transformItems={items =>
+                    items.filter(item => item.attribute !== 'price')
+                }
+            />
         </div>
     );
 };
