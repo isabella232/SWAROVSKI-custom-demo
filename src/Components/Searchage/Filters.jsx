@@ -186,26 +186,32 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
     };
 
     return (
-        <Rheostat
-            min={min}
-            max={max}
-            values={[currentRefinement.min, currentRefinement.max]}
-            onChange={onChange}
-            onValuesUpdated={onValuesUpdated}
-        >
-            <div
-                className="rheostat-marker rheostat-marker--large"
-                style={{ left: 0 }}
-            >
-                <div className="rheostat-value">{stateMin}</div>
+        <div className="filters-content">
+            <div className="title" style={{ marginBottom: '1em' }}>
+                <h3>Price</h3>
+                <p>-</p>
             </div>
-            <div
-                className="rheostat-marker rheostat-marker--large"
-                style={{ right: 0 }}
+            <Rheostat
+                min={min}
+                max={max}
+                values={[currentRefinement.min, currentRefinement.max]}
+                onChange={onChange}
+                onValuesUpdated={onValuesUpdated}
             >
-                <div className="rheostat-value">{stateMax}</div>
-            </div>
-        </Rheostat>
+                <div
+                    className="rheostat-marker rheostat-marker--large"
+                    style={{ left: 0 }}
+                >
+                    <div className="rheostat-value">{stateMin}</div>
+                </div>
+                <div
+                    className="rheostat-marker rheostat-marker--large"
+                    style={{ right: 0 }}
+                >
+                    <div className="rheostat-value">{stateMax}</div>
+                </div>
+            </Rheostat>
+        </div>
     );
 };
 
