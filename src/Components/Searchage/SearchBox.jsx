@@ -25,33 +25,7 @@ const SearchBox = ({ currentRefinement, refine }) => {
     );
 };
 
-// const CurrentRefinements = ({ items }) => (
-//     <ul className="refinement-content">
-//         {items.map(item => (
-//             <li className="refinement-item" key={item.label}>
-//                 {item.items ? (
-//                     <React.Fragment>
-//                         <h3>{item.label}</h3>
-//                         <ul className="refinement-results">
-//                             {item.items.map(nested => (
-//                                 <li key={nested.label}>
-//                                     <a className="refinement-filter" href="#">
-//                                         {nested.label}
-//                                     </a>
-//                                 </li>
-//                             ))}
-//                         </ul>
-//                     </React.Fragment>
-//                 ) : (
-//                     <a href="#">{item.label}</a>
-//                 )}
-//             </li>
-//         ))}
-//     </ul>
-// );
-
 const CurrentRefinements = ({ items, refine }) => {
-    console.log('Current refinement', items);
     const unique = uniqBy(items, 'currentRefinement');
 
     return (
