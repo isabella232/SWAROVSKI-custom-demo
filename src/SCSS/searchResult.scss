@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './mixin.scss';
 
 .container {
     width: 90%;
@@ -52,12 +53,23 @@
     display: none;
 }
 
-// .ais-VoiceSearch-button svg {
-//     position: absolute;
-//     top: 0;
-//     width: 20px;
-//     height: 20px;
-// }
+//SORT BY and STATS
+
+.sort-and-stat {
+    display: flex;
+    justify-content: space-between;
+    width: 76%;
+    margin: auto 0 auto auto;
+    .ais-Stats-text {
+        color: $title-filters-color;
+    }
+}
+.ais-SortBy-select {
+    .ais-SortBy-option {
+        color: $title-filters-color;
+        @include title-filter;
+    }
+}
 
 //SEARCHRESULT
 
