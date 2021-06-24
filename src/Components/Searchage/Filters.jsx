@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     connectRefinementList,
@@ -27,39 +27,90 @@ const CustomFilters = () => {
 
 const CatFilter = ({ items, currentRefinement, refine, createURL }) => {
     return (
-        <ul>
-            {items.map(item => (
-                <li key={item.label}>
-                    <a
-                        href={createURL(item.value)}
-                        style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                        onClick={event => {
-                            event.preventDefault();
-                            refine(item.value);
-                        }}
-                    >
-                        {item.label} ({item.count})
-                    </a>
-                    {item.items && (
-                        <HierarchicalMenu
-                            items={item.items}
-                            refine={refine}
-                            createURL={createURL}
-                        />
-                    )}
-                </li>
-            ))}
-        </ul>
+        <div className="filters-content">
+            <div className="title">
+                <h3>Category</h3>
+                <p>-</p>
+            </div>
+            <ul className="filter-list-content">
+                {items.map(item => (
+                    <li className="filter-list" key={item.label}>
+                        <a
+                            className="button-filter"
+                            href={createURL(item.value)}
+                            style={{ fontWeight: item.isRefined ? 'bold' : '' }}
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                        {item.items && (
+                            <HierarchicalMenu
+                                items={item.items}
+                                refine={refine}
+                                createURL={createURL}
+                            />
+                        )}
+                    </li>
+                ))}
+            </ul>
+            <div className="line"></div>
+        </div>
     );
 };
 
 const HierarchicalMenu = connectHierarchicalMenu(CatFilter);
 
 // Color Filter
-const ColorRefinementList = ({ items, refine }) => (
+const ColorRefinementList = ({ items, refine }) => {
+    const [colors, setColors] = useState(true);
+    return (
+        <div className="filters-content">
+            <div
+                className="title"
+                onClick={() => {
+                    setColors(!colors);
+                }}
+            >
+                <h3>Colors</h3>
+                <p>-</p>
+            </div>
+            <ul
+                className={`filter-list-content ${
+                    colors ? 'active-filters' : 'hidden-filters'
+                }`}
+            >
+                {items.map(item => (
+                    <li className="filter-list" key={item.label}>
+                        <a
+                            className="button-filter"
+                            href="#"
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            <div className="line"></div>
+        </div>
+    );
+};
+
+// On click Function See More Colors
+const CustomRefinementList = connectRefinementList(ColorRefinementList);
+
+// Size Filter
+
+const SizeRefinementList = ({ items, refine }) => (
     <div className="filters-content">
         <div className="title">
-            <h3>Colors</h3>
+            <h3>Size</h3>
             <p>-</p>
         </div>
         <ul className="filter-list-content">
@@ -68,40 +119,19 @@ const ColorRefinementList = ({ items, refine }) => (
                     <a
                         className="button-filter"
                         href="#"
+                        style={{ fontWeight: item.isRefined ? 'bold' : '' }}
                         onClick={event => {
                             event.preventDefault();
                             refine(item.value);
                         }}
                     >
-                        {item.label} ({item.count})
+                        {item.label}
                     </a>
                 </li>
             ))}
         </ul>
+        <div className="line"></div>
     </div>
-);
-
-const CustomRefinementList = connectRefinementList(ColorRefinementList);
-
-// Size Filter
-
-const SizeRefinementList = ({ items, refine }) => (
-    <ul>
-        {items.map(item => (
-            <li key={item.label}>
-                <a
-                    href="#"
-                    style={{ fontWeight: item.isRefined ? 'bold' : '' }}
-                    onClick={event => {
-                        event.preventDefault();
-                        refine(item.value);
-                    }}
-                >
-                    {item.label} ({item.count})
-                </a>
-            </li>
-        ))}
-    </ul>
 );
 
 const CustomSizeRefinementList = connectRefinementList(SizeRefinementList);

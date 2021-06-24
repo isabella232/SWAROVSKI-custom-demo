@@ -1,18 +1,27 @@
 // Mixins
-@import "./variables.scss";
+@import './variables.scss';
 
 // Buttons on search filter
 
 @mixin btn-filter {
- border: 1px solid $grey-border-buttons;
-  text-decoration: none;
-  color: $main-color;
-  width: 100%;
+    border: 1px solid $grey-border-buttons;
+    text-decoration: none;
+    color: $title-filters-color;
+    width: 100%;
+    display: flex;
+    margin-top: 1em;
+    padding: 0.8em;
+    font-size: 12px;
+}
+
+@mixin btn-filter-hover {
+    border: 1px solid $main-color;
 }
 
 // Title of each filter
-@mixin title-filter{
-  font-size: 14px;
-  color: $title-filters-color;
-  text-transform: uppercase;
+@mixin title-filter {
+    font-size: 14px;
+    color: $title-filters-color;
+    text-transform: uppercase;
+    margin-top: 1em;
 }

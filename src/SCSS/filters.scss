@@ -3,27 +3,64 @@
 
 .filters-content {
     width: 100%;
-    background-color: aqua;
     .title {
+        cursor: pointer;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         h3 {
             @include title-filter;
         }
     }
     .filter-list-content {
         width: 100%;
-        background-color: brown;
         .filter-list {
             width: 100%;
-            background-color: coral;
             p {
                 font-size: 16px;
             }
             .button-filter {
-                background-color: aqua;
                 @include btn-filter;
+            }
+            .button-filter:hover {
+                @include btn-filter-hover;
             }
         }
     }
+    .line {
+        border-bottom: 1px solid $grey-border-buttons;
+        width: 70%;
+        margin: 1em auto 1em auto;
+    }
+}
+
+.active-filters {
+    animation: fadeFilters 0.5s forwards ease-in-out;
+}
+
+.hidden-filters {
+  animation: fadeFiltersOut 0.5s forwards ease-in-out;
+}
+
+@keyframes fadeFilters {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100%{
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeFiltersOut {
+  0% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100%{
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+  }
 }
