@@ -42,7 +42,7 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     }
                     {catEyeGlasses ? (
                         <div className="searchPanel-results">
-                            <Configure filters="google_product_category:Health & Beauty > Personal Care > Vision Care > Eyeglasses" />
+                            <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
                             <CustomFilters />
                             <CustomHits />
                         </div>) : (
