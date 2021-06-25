@@ -21,8 +21,8 @@ const CustomFilters = ({ filterAnim }) => {
                 name="Categories" /> */}
 
             <CustomRefinementList attribute="color" />
-            <CustomSizeRefinementList attribute="size" />
-            <CustomRangeSlider attribute="price" min={10} max={550} />
+            {/* <CustomSizeRefinementList attribute="size" />
+            <CustomRangeSlider attribute="price" min={10} max={550} /> */}
         </div>
 
     );

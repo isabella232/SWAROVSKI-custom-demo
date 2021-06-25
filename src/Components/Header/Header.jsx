@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 
-import logo from '../../Assets/Images/logo.jpeg';
 import headerUp from '../../Assets/Images/headerUp.png';
 
-import SelectPersona from './Persona'
+// import SelectPersona from './Persona';
 
 //FONT AWESOME
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPalette } from '@fortawesome/free-solid-svg-icons'
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette } from '@fortawesome/free-solid-svg-icons';
 
 const Header = ({
-    setSelectedOption, setSearchVisible, searchVisible, setCatSunglasses, catSunglasses, catEyeGlasses, setCatEyeGlasses
+    setSelectedOption,
+    setSearchVisible,
+    searchVisible,
+    setCatSunglasses,
+    catSunglasses,
+    catEyeGlasses,
+    setCatEyeGlasses
 }) => {
     return (
         <header className="header">
             <img src={headerUp} alt="" className="headerUp" />
             <div className="header-wrapper">
-                <img src={logo} alt="logo" className="logo" />
                 <ul>
                     <li
                         onClick={() => {
@@ -28,7 +30,7 @@ const Header = ({
                             setCatEyeGlasses(false);
                         }}
                     >
-                        SUNGLASSES
+                        BRACELETS
                     </li>
                     <li
                         onClick={() => {
@@ -37,16 +39,12 @@ const Header = ({
                             setSearchVisible(true);
                         }}
                     >
-                        EYEGLASSES
+                        NECKLACES
                     </li>
-                    <li className="design">
-                        <FontAwesomeIcon icon={faPalette} />
-                        <span>DESIGN YOUR OWN</span>
-                    </li>
-                    <li>PRESCRIPTION</li>
-                    <li>OUR ICONS</li>
                     <li className="promo">PROMO</li>
-                    <li><SelectPersona setSelectedOption={setSelectedOption} /></li>
+                    {/* <li>
+                        <SelectPersona setSelectedOption={setSelectedOption} />
+                    </li> */}
                 </ul>
                 <div
                     className="search-wrapper"
@@ -71,7 +69,7 @@ const Header = ({
                         />
                     </svg>
                     <p className="search-placeholder">Search ...</p>
-                </div>
+                </div>{' '}
             </div>
         </header>
     );

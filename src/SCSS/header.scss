@@ -1,4 +1,8 @@
-@import "../SCSS/variables.scss";
+@import '../SCSS/variables.scss';
+
+.header {
+    background-color: #f0eee4;
+}
 
 .headerUp {
     width: 100%;
@@ -8,7 +12,7 @@
     width: 95%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     ul {
@@ -26,7 +30,7 @@
             position: relative;
 
             &::before {
-                content: "";
+                content: '';
                 position: absolute;
                 background-color: black;
                 height: 4px;
