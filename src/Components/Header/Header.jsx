@@ -11,12 +11,8 @@ const Header = ({
     setSearchVisible,
     searchVisible,
     setCatSunglasses,
-    catSunglasses,
-    catEyeGlasses,
     setCatEyeGlasses
 }) => {
-    console.log(catSunglasses);
-
     return (
         <header className="header">
             <img src={headerUp} alt="" className="headerUp" />
@@ -51,7 +47,11 @@ const Header = ({
                 </ul>
                 <div
                     className="search-wrapper"
-                    onClick={() => setSearchVisible(!searchVisible)}
+                    onClick={() => {
+                        setSearchVisible(!searchVisible);
+                        setCatEyeGlasses(false);
+                        setCatSunglasses(false);
+                    }}
                 >
                     <svg
                         viewBox="0 0 897 897"
