@@ -41,7 +41,7 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                         <div className="searchPanel-results">
                             <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                             <Configure filters="categorylvl3:Sunglasses" />
-                            <CustomFilters />
+                            <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
 
                         </div>) : (
@@ -56,11 +56,11 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     {catEyeGlasses ? (<div className="searchPanel-results">
                         <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                         <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
-                        <CustomFilters />
+                        <CustomFilters filterAnim={filterAnim} />
                         <CustomHits />
                     </div>) : (<div className="searchPanel-results">
                         <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
-                        <CustomFilters />
+                        <CustomFilters filterAnim={filterAnim} />
                         <CustomHits />
                     </div>)}
 
