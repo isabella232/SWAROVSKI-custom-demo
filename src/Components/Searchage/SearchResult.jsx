@@ -10,7 +10,8 @@ import {
     Highlight,
     Configure,
     SortBy,
-    Stats
+    Stats,
+    QueryRuleCustomData
 } from 'react-instantsearch-dom';
 
 //COMPONENTS
@@ -31,6 +32,19 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
             }`}
         >
             <InstantSearch searchClient={searchClient} indexName="RayBan_FB">
+                <QueryRuleCustomData
+                    transformItems={items => {
+                        const match = items.find(data =>
+                            Boolean(data.redirect)
+                        );
+                        if (match && match.redirect) {
+                            window.location.href = match.redirect;
+                        }
+                        return [];
+                    }}
+                >
+                    {() => null}
+                </QueryRuleCustomData>
                 <div className="search-panel">
                     <CustomSearchBox />
                     {catSunglasses ? (
