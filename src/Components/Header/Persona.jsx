@@ -19,7 +19,7 @@ const SelectPersona = ({ setSelectedOption }) => {
         indicatorSeparator: styles => ({ display: "none" }),
         dropdownIndicator: styles => ({ color: 'black' }),
         singleValue: styles => ({ top: '0', width: '50%' }),
-        menu: styles => ({ width: '8rem', top: '2rem', left: '0', position: 'absolute', backgroundColor: 'white', borderRadius: '2px' }),
+        menu: styles => ({ width: '8rem', top: '2rem', left: '0', position: 'absolute', backgroundColor: 'white', borderRadius: '2px', zIndex: '99' }),
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
             return {
                 ...styles,
