@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import logo from '../../Assets/Images/logo.jpeg';
 import headerUp from '../../Assets/Images/headerUp.png';
 
+import SelectPersona from './Persona'
+
 //FONT AWESOME
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette } from '@fortawesome/free-solid-svg-icons';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPalette } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const Header = ({
-    setSearchVisible,
-    searchVisible,
-    setCatSunglasses,
-    setCatEyeGlasses
+    setSelectedOption, setSearchVisible, searchVisible, setCatSunglasses, catSunglasses, catEyeGlasses, setCatEyeGlasses
 }) => {
     return (
         <header className="header">
@@ -44,6 +46,7 @@ const Header = ({
                     <li>PRESCRIPTION</li>
                     <li>OUR ICONS</li>
                     <li className="promo">PROMO</li>
+                    <li><SelectPersona setSelectedOption={setSelectedOption} /></li>
                 </ul>
                 <div
                     className="search-wrapper"

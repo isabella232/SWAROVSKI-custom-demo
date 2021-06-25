@@ -19,9 +19,16 @@ import CustomHits from './Hits';
 import CustomFilters from './Filters';
 import CustomSearchBox from './SearchBox';
 
-const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
-    const searchClient = algoliasearch(window.appID, window.key);
-    const [filterAnim, setFilterAnim] = useState(true);
+
+const SearchResults = ({ selectedOption, searchVisible, catSunglasses, catEyeGlasses }) => {
+
+    const searchClient = algoliasearch(
+        window.appID,
+        window.key
+    );
+    const [filterAnim, setFilterAnim] = useState(true)
+
+
 
     return (
         <div
@@ -49,44 +56,41 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     <CustomSearchBox />
                     {catSunglasses ? (
                         <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <Configure filters="categorylvl3:Sunglasses" />
+
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                            <Configure userToken={selectedOption} filters="categorylvl3:Sunglasses" enablePersonalization={true} />
+
                             <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
                         </div>
                     ) : (
                         <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
+
+                            <Configure userToken={selectedOption} enablePersonalization={true} />
+                            <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+
                             <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
                         </div>
-                    )}
-                    {catEyeGlasses ? (
-                        <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    ) : (
-                        <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    )}
+
+                    )
+                    }
+                    {catEyeGlasses ? (<div className="searchPanel-results">
+                        <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                        <Configure userToken={selectedOption} filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" enablePersonalization={true} />
+                        <CustomFilters filterAnim={filterAnim} />
+                        <CustomHits />
+                    </div>) : (<div className="searchPanel-results">
+                        <Configure userToken={selectedOption} enablePersonalization={true} />
+                        <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
+                        <CustomFilters filterAnim={filterAnim} />
+                        <CustomHits />
+                    </div>)}
+
+
+
+
+
 
                     <div className="pagination">
                         <Pagination />
