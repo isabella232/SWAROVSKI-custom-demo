@@ -11,14 +11,15 @@ const SelectPersona = ({ setSelectedOption }) => {
     //STYLE SELECT
 
     const colourStyles = {
-        control: styles => ({ backgroundColor: 'transparent', display: 'flex', width: '100%', marginTop: '0.8rem' }),
+        control: styles => ({ backgroundColor: 'transparent', display: 'flex', width: '100%', position: 'relative' }),
         input: styles => ({ width: '100%' }),
-        container: styles => ({ borderBottom: '1px solid black', width: '100%' }),
+        container: styles => ({ width: '100%' }),
         valueContainer: styles => ({ backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }),
-        placeholder: styles => ({ backgroundColor: 'transparent', fontSize: '0.8rem', color: 'black', fontFamily: "Adobe Clean Light" }),
+        placeholder: styles => ({ backgroundColor: 'transparent', fontSize: '1rem', color: 'black', fontFamily: "Oswald", textTransform: 'uppercase' }),
         indicatorSeparator: styles => ({ display: "none" }),
         dropdownIndicator: styles => ({ color: 'black' }),
-        singleValue: styles => ({ top: '0', width: '100%' }),
+        singleValue: styles => ({ top: '0', width: '50%' }),
+        menu: styles => ({ width: '8rem', top: '2rem', left: '0', position: 'absolute', backgroundColor: 'white', borderRadius: '2px' }),
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
             return {
                 ...styles,
@@ -26,7 +27,13 @@ const SelectPersona = ({ setSelectedOption }) => {
                 color: isFocused ? 'white' : 'black',
                 fontSize: '0.8rem', fontFamily: "Adobe Clean Light", margin: '1rem',
                 transition: 'all 0.2s',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                width: '80%',
+                textAlign: 'center',
+                textTransform: "uppercase",
+                fontWeight: 'bold',
+                borderRadius: '2px'
+
 
 
             };
@@ -40,7 +47,7 @@ const SelectPersona = ({ setSelectedOption }) => {
     }
 
     return (
-        <Select options={options} onChange={selectValue} setSelectedOption={setSelectedOption} styles={colourStyles} />
+        <Select options={options} onChange={selectValue} setSelectedOption={setSelectedOption} styles={colourStyles} placeholder={"Persona"} />
     )
 
 }
