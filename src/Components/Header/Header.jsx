@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import logo from '../../Assets/Images/logo.jpeg'
 import headerUp from '../../Assets/Images/headerUp.png'
 
+import SelectPersona from './Persona'
+
 //FONT AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPalette } from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({ setSearchVisible, searchVisible, setCatSunglasses, catSunglasses, catEyeGlasses, setCatEyeGlasses }) => {
+const Header = ({ setSelectedOption, setSearchVisible, searchVisible, setCatSunglasses, catSunglasses, catEyeGlasses, setCatEyeGlasses }) => {
     console.log(catSunglasses)
 
     return (
@@ -30,6 +32,7 @@ const Header = ({ setSearchVisible, searchVisible, setCatSunglasses, catSunglass
                     <li>PRESCRIPTION</li>
                     <li>OUR ICONS</li>
                     <li className="promo">PROMO</li>
+                    <li><SelectPersona setSelectedOption={setSelectedOption} /></li>
                 </ul>
                 <div className="search-wrapper" onClick={() => setSearchVisible(!searchVisible)}>
                     <svg viewBox="0 0 897 897" fill="none" xmlns="http://www.w3.org/2000/svg">

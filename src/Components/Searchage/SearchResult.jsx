@@ -40,12 +40,13 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     {catSunglasses ? (
                         <div className="searchPanel-results">
                             <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
-                            <Configure filters="categorylvl3:Sunglasses" />
+                            <Configure filters="categorylvl3:Sunglasses" enablePersonalization={true} />
                             <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
 
                         </div>) : (
                         <div className="searchPanel-results">
+                            <Configure enablePersonalization={true} />
                             <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                             <CustomFilters filterAnim={filterAnim} />
                             <CustomHits />
@@ -55,10 +56,11 @@ const SearchResults = ({ searchVisible, catSunglasses, catEyeGlasses }) => {
                     }
                     {catEyeGlasses ? (<div className="searchPanel-results">
                         <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
-                        <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" />
+                        <Configure filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'" enablePersonalization={true} />
                         <CustomFilters filterAnim={filterAnim} />
                         <CustomHits />
                     </div>) : (<div className="searchPanel-results">
+                        <Configure enablePersonalization={true} />
                         <FilterBtn filterAnim={filterAnim} setFilterAnim={setFilterAnim} />
                         <CustomFilters filterAnim={filterAnim} />
                         <CustomHits />
