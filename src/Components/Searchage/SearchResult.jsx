@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
+import Switch from 'react-switch';
 
 import {
     InstantSearch,
@@ -16,6 +17,7 @@ import {
 
 //COMPONENTS
 import CustomHits from './Hits';
+import CustomHitsPrivate from './CustomHitsPrivate';
 import CustomFilters from './Filters';
 import CustomSearchBox from './SearchBox';
 
@@ -26,7 +28,11 @@ const SearchResults = ({
     catEyeGlasses
 }) => {
     const searchClient = algoliasearch(window.appID, window.key);
+    // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
+    const [checked, setChecked] = useState(false);
+
+    // console.log('ID', searchClientPublic);
 
     return (
         <div
@@ -36,34 +42,52 @@ const SearchResults = ({
                     : 'hidden'
             }`}
         >
-            <InstantSearch
-                // ...
-                searchClient={searchClient}
-                indexName="swarovski_customDemo_products"
-            >
-                <CustomSearchBox />
-                <CustomHits />
-                <div className="pagination">
-                    <Pagination />
-                </div>
-            </InstantSearch>
+            <div className="switch-button">
+                <h3>Access to private sale</h3>
+                <SwitchExample checked={checked} setChecked={setChecked} />
+            </div>
+            {checked ? (
+                <InstantSearch
+                    // ...
+                    searchClient={searchClient}
+                    indexName="swarovski_customDemo_products"
+                >
+                    <Configure
+                        userToken={selectedOption}
+                        filters="segment:'private'"
+                        enablePersonalization={true}
+                    />
+                    <CustomSearchBox />
+                    <div className="display-results">
+                        <CustomFilters filterAnim={filterAnim} />
+                        <CustomHitsPrivate />
+                    </div>
+                    <div className="pagination">
+                        <Pagination />
+                    </div>
+                </InstantSearch>
+            ) : (
+                <InstantSearch
+                    // ...
+                    searchClient={searchClient}
+                    indexName="swarovski_customDemo_products"
+                >
+                    <CustomSearchBox />
+                    <div className="display-results">
+                        <CustomFilters filterAnim={filterAnim} />
+                        <CustomHits />
+                    </div>
+                    <div className="pagination">
+                        <Pagination />
+                    </div>
+                </InstantSearch>
+            )}
+
             {/* <InstantSearch
                 searchClient={searchClient}
                 indexName="swarovski_customDemo_products"
             >
-                <QueryRuleCustomData
-                    transformItems={items => {
-                        const match = items.find(data =>
-                            Boolean(data.redirect)
-                        );
-                        if (match && match.redirect) {
-                            window.location.href = match.redirect;
-                        }
-                        return [];
-                    }}
-                >
-                    {() => null}
-                </QueryRuleCustomData>
+
                 <div className="search-panel">
                     <CustomSearchBox />
                     {catSunglasses ? (
@@ -145,6 +169,19 @@ const FilterBtn = ({ filterAnim, setFilterAnim }) => {
             <p>NAVIGATION & FILTERS</p>
             {filterAnim ? <p>-</p> : <p>+</p>}
         </div>
+    );
+};
+
+const SwitchExample = ({ setChecked, checked }) => {
+    return (
+        <label>
+            <Switch
+                onChange={() => {
+                    setChecked(!checked);
+                }}
+                checked={checked}
+            />
+        </label>
     );
 };
 

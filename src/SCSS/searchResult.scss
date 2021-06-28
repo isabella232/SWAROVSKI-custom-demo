@@ -1,5 +1,5 @@
-@import "./variables.scss";
-@import "./mixin.scss";
+@import './variables.scss';
+@import './mixin.scss';
 
 .container {
     width: 90%;
@@ -88,12 +88,14 @@
     width: 100%;
 
     .hit-list {
+        position: relative;
         width: 30%;
         display: flex;
         flex-direction: column;
         border: $third-color solid 1px;
         margin: 0.2rem;
         padding: 1rem;
+        z-index: 0;
 
         .infos {
             h3 {
@@ -102,6 +104,19 @@
             p {
                 font-size: 1rem;
                 font-weight: 200;
+            }
+            .barred-price {
+                background: linear-gradient(
+                    to left top,
+                    transparent 47.75%,
+                    currentColor 49.5%,
+                    currentColor 50.5%,
+                    transparent 52.25%
+                );
+            }
+            .price {
+                display: flex;
+                margin-top: 1em;
             }
         }
 
@@ -115,6 +130,14 @@
                 object-position: center;
                 position: relative;
             }
+        }
+
+        .private-sale-img {
+            width: 5em;
+            position: absolute;
+            z-index: 1000;
+            border-radius: 10px;
+            right: 0;
         }
     }
 }
@@ -131,6 +154,7 @@
         width: 20%;
         will-change: width;
     }
+
 
     .hits-wrapper {
         width: 100%;
@@ -181,5 +205,20 @@
     }
 
     100% {
+    }
+}
+
+// Switch button
+.switch-button {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.display-results {
+    display: flex;
+    .hits-wrapper{
+        width: 80%;
     }
 }
