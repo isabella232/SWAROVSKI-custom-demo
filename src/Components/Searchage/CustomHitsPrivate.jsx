@@ -14,29 +14,45 @@ const Hits = ({ hits }) => {
             <ul className="hits-list">
                 {hits.map(hit => {
                     console.log('HIT', hit);
-                    return (
-                        <li className="hit-list">
-                            <img
-                                className="private-sale-img"
-                                src={PrivateSale}
-                                alt=""
-                            />
-                            <div className="image-wrapper">
-                                <img src={hit.image_main_live} alt="" />
-                            </div>
-                            <div className="infos">
-                                <Highlight hit={hit} attribute="title_en" />
-                                <div className="price">
-                                    <p className="barred-price">
-                                        {hit.price_int}.00 €
-                                    </p>
-                                    <p style={{ marginLeft: '1em' }}>
-                                        {hit.salePrice}0 €
-                                    </p>
+                    if (hit.segment === 'public') {
+                        return (
+                            <li className="hit-list">
+                                <div className="image-wrapper">
+                                    <img src={hit.image_main_live} alt="" />
                                 </div>
-                            </div>
-                        </li>
-                    );
+                                <div className="infos">
+                                    <Highlight hit={hit} attribute="title_en" />
+                                    <div className="price">
+                                        {hit.price_int}.00 €
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    } else {
+                        return (
+                            <li className="hit-list">
+                                <img
+                                    className="private-sale-img"
+                                    src={PrivateSale}
+                                    alt=""
+                                />
+                                <div className="image-wrapper">
+                                    <img src={hit.image_main_live} alt="" />
+                                </div>
+                                <div className="infos">
+                                    <Highlight hit={hit} attribute="title_en" />
+                                    <div className="price">
+                                        <p className="barred-price">
+                                            {hit.price_int}.00 €
+                                        </p>
+                                        <p style={{ marginLeft: '1em' }}>
+                                            {hit.salePrice}0 €
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    }
                 })}
             </ul>
         </div>

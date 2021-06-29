@@ -48,11 +48,6 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure
-                        userToken={selectedOption}
-                        filters="segment:'private'"
-                        enablePersonalization={true}
-                    />
                     <div className="search-switch">
                         <CustomSearchBox />
                         <div className="switch-button">
@@ -77,6 +72,11 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
+                    <Configure
+                        userToken={selectedOption}
+                        filters="segment:'public'"
+                        enablePersonalization={true}
+                    />
                     <div className="search-switch">
                         <CustomSearchBox />
                         <div className="switch-button">
