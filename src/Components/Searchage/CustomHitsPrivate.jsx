@@ -5,7 +5,6 @@ import { connectHits } from 'react-instantsearch-dom';
 import PrivateSale from '../../Assets/Images/private-sale.png';
 
 const Hits = ({ hits }) => {
-    console.log('Hits', hits);
     return (
         <div className="hits-wrapper">
             <div className="sort-and-stat">
@@ -13,7 +12,6 @@ const Hits = ({ hits }) => {
             </div>
             <ul className="hits-list">
                 {hits.map(hit => {
-                    console.log('HIT', hit);
                     if (hit.segment === 'public') {
                         return (
                             <li className="hit-list">

@@ -4,7 +4,6 @@ import { Stats, Highlight } from 'react-instantsearch-dom';
 import { connectHits } from 'react-instantsearch-dom';
 
 const Hits = ({ hits }) => {
-    console.log('Hits', hits);
     return (
         <div className="hits-wrapper">
             <div className="sort-and-stat">
@@ -12,7 +11,6 @@ const Hits = ({ hits }) => {
             </div>
             <ul className="hits-list">
                 {hits.map(hit => {
-                    console.log('HIT', hit);
                     return (
                         <li className="hit-list">
                             <div className="image-wrapper">
