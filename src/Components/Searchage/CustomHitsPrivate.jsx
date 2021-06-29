@@ -12,6 +12,7 @@ const Hits = ({ hits }) => {
             </div>
             <ul className="hits-list">
                 {hits.map(hit => {
+                    console.log('HIT', hit)
                     if (hit.segment === 'public') {
                         return (
                             <li className="hit-list">

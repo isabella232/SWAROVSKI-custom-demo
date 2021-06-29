@@ -3,11 +3,7 @@ import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 
-import {
-    InstantSearch,
-    Pagination,
-    Configure,
-} from 'react-instantsearch-dom';
+import { InstantSearch, Pagination, Configure } from 'react-instantsearch-dom';
 
 //COMPONENTS
 import CustomHits from './Hits';
@@ -42,10 +38,7 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure
-                    analytics={false}
-                    ruleContexts={['private']}
-                    />
+                    <Configure analytics={false} ruleContexts={['private']} />
                     <div className="search-switch">
                         <CustomSearchBox />
                         <div className="switch-button">
@@ -71,9 +64,7 @@ const SearchResults = ({
                     indexName="swarovski_customDemo_products"
                 >
                     <Configure
-                        userToken={selectedOption}
                         filters="segment:'public'"
-                        enablePersonalization={true}
                         ruleContexts={['public']}
                     />
                     <div className="search-switch">
