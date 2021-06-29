@@ -5,14 +5,8 @@ import Switch from 'react-switch';
 
 import {
     InstantSearch,
-    Hits,
-    Highlight,
-    SearchBox,
     Pagination,
     Configure,
-    SortBy,
-    Stats,
-    QueryRuleCustomData
 } from 'react-instantsearch-dom';
 
 //COMPONENTS
@@ -48,6 +42,10 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
+                    <Configure
+                    analytics={false}
+                    ruleContexts={['private']}
+                    />
                     <div className="search-switch">
                         <CustomSearchBox />
                         <div className="switch-button">
@@ -76,6 +74,7 @@ const SearchResults = ({
                         userToken={selectedOption}
                         filters="segment:'public'"
                         enablePersonalization={true}
+                        ruleContexts={['public']}
                     />
                     <div className="search-switch">
                         <CustomSearchBox />
