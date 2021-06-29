@@ -18,8 +18,8 @@ const Hits = ({ hits }) => {
                             </div>
                             <div className="infos">
                                 <Highlight hit={hit} attribute="title_en" />
-                                {hit.price_int}.00 € )
                             </div>
+                            {hit.price_int}.00 €
                         </li>
                     );
                 })}
