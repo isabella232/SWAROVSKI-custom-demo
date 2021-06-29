@@ -12,7 +12,7 @@ const Hits = ({ hits }) => {
             </div>
             <ul className="hits-list">
                 {hits.map(hit => {
-                    console.log('HIT', hit)
+                    console.log('HIT', hit);
                     if (hit.segment === 'public') {
                         return (
                             <li className="hit-list">
@@ -21,9 +21,20 @@ const Hits = ({ hits }) => {
                                 </div>
                                 <div className="infos">
                                     <Highlight hit={hit} attribute="title_en" />
-                                    <div className="price">
-                                        {hit.price_int}.00 €
-                                    </div>
+                                    {hit.salePrice ? (
+                                        <div className="price">
+                                            <div className="barred-price">
+                                                {hit.price_int} €
+                                            </div>
+                                            <div style={{ marginLeft: '1em' }}>
+                                                {hit.salePrice} €
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="price">
+                                            {hit.price_int} €
+                                        </div>
+                                    )}
                                 </div>
                             </li>
                         );
@@ -42,10 +53,10 @@ const Hits = ({ hits }) => {
                                     <Highlight hit={hit} attribute="title_en" />
                                     <div className="price">
                                         <div className="barred-price">
-                                            {hit.price_int}.00 €
+                                            {hit.price_int} €
                                         </div>
                                         <div style={{ marginLeft: '1em' }}>
-                                            {hit.salePrice}0 €
+                                            {hit.salePrice} €
                                         </div>
                                     </div>
                                 </div>
