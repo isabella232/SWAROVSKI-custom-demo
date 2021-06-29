@@ -209,11 +209,18 @@
 }
 
 // Switch button
-.switch-button {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
+.search-switch{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    .switch-button {
+        display: flex;
+        align-items: center;
+        h3{
+            font-size: 0.8em;
+            margin: 0 0.1em;
+        }
+    }
 }
 
 .display-results {
@@ -221,4 +228,10 @@
     .hits-wrapper{
         width: 80%;
     }
+}
+
+// Pagination
+
+.pagination{
+    margin: 1em 0;
 }

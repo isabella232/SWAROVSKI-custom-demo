@@ -42,10 +42,6 @@ const SearchResults = ({
                     : 'hidden'
             }`}
         >
-            <div className="switch-button">
-                <h3>Access to private sale</h3>
-                <SwitchExample checked={checked} setChecked={setChecked} />
-            </div>
             {checked ? (
                 <InstantSearch
                     // ...
@@ -57,7 +53,16 @@ const SearchResults = ({
                         filters="segment:'private'"
                         enablePersonalization={true}
                     />
-                    <CustomSearchBox />
+                    <div className="search-switch">
+                        <CustomSearchBox />
+                        <div className="switch-button">
+                            <h3>Access to private sale</h3>
+                            <SwitchExample
+                                checked={checked}
+                                setChecked={setChecked}
+                            />
+                        </div>
+                    </div>
                     <div className="display-results">
                         <CustomFilters filterAnim={filterAnim} />
                         <CustomHitsPrivate />
@@ -72,7 +77,16 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <CustomSearchBox />
+                    <div className="search-switch">
+                        <CustomSearchBox />
+                        <div className="switch-button">
+                            <h3>Access to private sale</h3>
+                            <SwitchExample
+                                checked={checked}
+                                setChecked={setChecked}
+                            />
+                        </div>
+                    </div>
                     <div className="display-results">
                         <CustomFilters filterAnim={filterAnim} />
                         <CustomHits />

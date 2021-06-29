@@ -22,30 +22,6 @@ const Header = ({
         <header className="header">
             <img src={headerUp} alt="" className="headerUp" />
             <div className="header-wrapper">
-                <ul>
-                    <li
-                        onClick={() => {
-                            setCatSunglasses(true);
-                            setSearchVisible(true);
-                            setCatEyeGlasses(false);
-                        }}
-                    >
-                        BRACELETS
-                    </li>
-                    <li
-                        onClick={() => {
-                            setCatEyeGlasses(true);
-                            setCatSunglasses(false);
-                            setSearchVisible(true);
-                        }}
-                    >
-                        NECKLACES
-                    </li>
-                    <li className="promo">PROMO</li>
-                    {/* <li>
-                        <SelectPersona setSelectedOption={setSelectedOption} />
-                    </li> */}
-                </ul>
                 <div
                     className="search-wrapper"
                     onClick={() => {

@@ -68,10 +68,11 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        margin-top: 1em;
         .search-placeholder {
             color: $main-color;
             font-weight: 200;
-            font-size: 1rem;
+            font-size: 1.2rem;
             margin-left: 1rem;
         }
         svg {

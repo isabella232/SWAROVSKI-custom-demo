@@ -27,7 +27,9 @@ const Hits = ({ hits }) => {
                             <div className="infos">
                                 <Highlight hit={hit} attribute="title_en" />
                                 <div className="price">
-                                    <p className='barred-price'>{hit.price_int}.00 €</p>
+                                    <p className="barred-price">
+                                        {hit.price_int}.00 €
+                                    </p>
                                     <p style={{ marginLeft: '1em' }}>
                                         {hit.salePrice}0 €
                                     </p>
