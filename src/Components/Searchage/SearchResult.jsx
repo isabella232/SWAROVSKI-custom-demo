@@ -21,8 +21,13 @@ const SearchResults = ({
     // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
     const [checked, setChecked] = useState(false);
+    const [isGlobal, setIsGlobal] = useState(false)
 
-    // console.log('ID', searchClientPublic);
+    if(window.location.search) {
+        if(new URLSearchParams(window.location.search).get('newsletter') === "global" && !isGlobal) {
+            setIsGlobal(true)
+        }
+    }
 
     return (
         <div
@@ -38,7 +43,10 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure analytics={false} ruleContexts={['private']} />
+                    <Configure
+                    analytics={false}
+                    ruleContexts={isGlobal ? ['private', 'global'] : ['private']}
+                    />
                     <div className="search-switch">
                         <CustomSearchBox />
                         <div className="switch-button">
