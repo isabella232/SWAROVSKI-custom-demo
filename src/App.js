@@ -29,26 +29,4 @@ const App = () => {
     );
 };
 
-// class SwitchExample extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = { checked: false };
-//         this.handleChange = this.handleChange.bind(this);
-//     }
-
-//     handleChange(checked) {
-//         this.setState({ checked });
-//         // this.props.onChange('checked', !checked);
-//     }
-
-//     render() {
-//         const checked = this.props.checked;
-//         return (
-//             <label>
-//                 <Switch onChange={this.handleChange} checked={checked} />
-//             </label>
-//         );
-//     }
-// }
-
 export default App;

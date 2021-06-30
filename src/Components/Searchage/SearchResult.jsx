@@ -9,6 +9,7 @@ import { InstantSearch, Pagination, Configure } from 'react-instantsearch-dom';
 import CustomHits from './Hits';
 import CustomHitsPrivate from './CustomHitsPrivate';
 import CustomFilters from './Filters';
+import CustomSearchBar from './SearchBox';
 
 const SearchResults = ({
     selectedOption,
@@ -25,6 +26,7 @@ const SearchResults = ({
     const [isPublic, setIsPublic] = useState(false);
     const [isPrivate, setIsPrivate] = useState(false);
     const [toggleIsShow, setToggleIsShow] = useState(true);
+    const [noParams, setNoParams] = useState(true);
 
     if (window.location.search) {
         if (
@@ -36,6 +38,7 @@ const SearchResults = ({
             setIsGlobal(true);
             setSearchVisible(true);
             setToggleIsShow(true);
+            setNoParams(false);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -46,6 +49,7 @@ const SearchResults = ({
             setIsPublic(true);
             setSearchVisible(true);
             setToggleIsShow(false);
+            setNoParams(false);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -57,6 +61,7 @@ const SearchResults = ({
             setSearchVisible(true);
             setToggleIsShow(false);
             setChecked(true);
+            setNoParams(false);
         }
     }
 
@@ -81,6 +86,13 @@ const SearchResults = ({
                         }
                     />
                     <div className="search-switch">
+                        {noParams ? (
+                            <div>
+                                <CustomSearchBar />
+                            </div>
+                        ) : (
+                            ''
+                        )}
                         {toggleIsShow ? (
                             <div className="switch-button">
                                 <h3>Access to private sale</h3>
@@ -114,6 +126,13 @@ const SearchResults = ({
                         }
                     />
                     <div className="search-switch">
+                        {noParams ? (
+                            <div>
+                                <CustomSearchBar />
+                            </div>
+                        ) : (
+                            ''
+                        )}
                         {toggleIsShow ? (
                             <div className="switch-button">
                                 <h3>Access to private sale</h3>
@@ -135,92 +154,6 @@ const SearchResults = ({
                     </div>
                 </InstantSearch>
             )}
-
-            {/* <InstantSearch
-                searchClient={searchClient}
-                indexName="swarovski_customDemo_products"
-            >
-
-                <div className="search-panel">
-                    <CustomSearchBox />
-                    {catSunglasses ? (
-                        <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <Configure
-                                userToken={selectedOption}
-                                filters="categorylvl3:Sunglasses"
-                                enablePersonalization={true}
-                            />
-
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    ) : (
-                        <div className="searchPanel-results">
-                            <Configure
-                                userToken={selectedOption}
-                                enablePersonalization={true}
-                            />
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    )}
-                    {catEyeGlasses ? (
-                        <div className="searchPanel-results">
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <Configure
-                                userToken={selectedOption}
-                                filters="google_product_category:'Health & Beauty > Personal Care > Vision Care > Eyeglasses'"
-                                enablePersonalization={true}
-                            />
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    ) : (
-                        <div className="searchPanel-results">
-                            <Configure
-                                userToken={selectedOption}
-                                enablePersonalization={true}
-                            />
-                            <FilterBtn
-                                filterAnim={filterAnim}
-                                setFilterAnim={setFilterAnim}
-                            />
-                            <CustomFilters filterAnim={filterAnim} />
-                            <CustomHits />
-                        </div>
-                    )}
-
-                    <div className="pagination">
-                        <Pagination />
-                    </div>
-                </div>
-            </InstantSearch> */}
-        </div>
-    );
-};
-
-const FilterBtn = ({ filterAnim, setFilterAnim }) => {
-    return (
-        <div
-            className="filterBtn"
-            onClick={() => {
-                setFilterAnim(!filterAnim);
-            }}
-        >
-            <p>NAVIGATION & FILTERS</p>
-            {filterAnim ? <p>-</p> : <p>+</p>}
         </div>
     );
 };
