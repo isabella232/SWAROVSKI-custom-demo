@@ -9,7 +9,6 @@ import { InstantSearch, Pagination, Configure } from 'react-instantsearch-dom';
 import CustomHits from './Hits';
 import CustomHitsPrivate from './CustomHitsPrivate';
 import CustomFilters from './Filters';
-import CustomSearchBox from './SearchBox';
 
 const SearchResults = ({
     selectedOption,
@@ -79,7 +78,6 @@ const SearchResults = ({
                         }
                     />
                     <div className="search-switch">
-                        <CustomSearchBox />
                         {toggleIsShow ? (
                             <div className="switch-button">
                                 <h3>Access to private sale</h3>
@@ -113,7 +111,6 @@ const SearchResults = ({
                         }
                     />
                     <div className="search-switch">
-                        <CustomSearchBox />
                         {toggleIsShow ? (
                             <div className="switch-button">
                                 <h3>Access to private sale</h3>
