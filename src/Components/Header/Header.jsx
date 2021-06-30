@@ -22,12 +22,10 @@ const Header = ({
         <header className="header">
             <img src={headerUp} alt="" className="headerUp" />
             <div className="header-wrapper">
-                <div
+                {/* <div
                     className="search-wrapper"
                     onClick={() => {
                         setSearchVisible(!searchVisible);
-                        setCatEyeGlasses(false);
-                        setCatSunglasses(false);
                     }}
                 >
                     <svg
@@ -45,7 +43,7 @@ const Header = ({
                         />
                     </svg>
                     <p className="search-placeholder">Search ...</p>
-                </div>{' '}
+                </div>{' '} */}
             </div>
         </header>
     );
