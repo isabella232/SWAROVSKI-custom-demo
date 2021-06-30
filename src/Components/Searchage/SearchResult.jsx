@@ -107,7 +107,7 @@ const SearchResults = ({
                     <Configure
                         filters="segment:'public'"
                         ruleContexts={
-                            isPrivate ? ['private', 'global'] : ['private']
+                            isPrivate ? ['public', 'global'] : ['public']
                         }
                     />
                     <div className="search-switch">
