@@ -37,7 +37,7 @@ const SearchResults = ({
         ) {
             setIsGlobal(true);
             setSearchVisible(true);
-            setToggleIsShow(true);
+            setToggleIsShow(false);
             setNoParams(false);
         }
         if (
