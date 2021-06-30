@@ -28,8 +28,9 @@ const SearchResults = ({
 
     if (window.location.search) {
         if (
-            new URLSearchParams(window.location.search).get('newsletter') ===
-                'global' &&
+            new URLSearchParams(window.location.search)
+                .get('newsletter')
+                .includes('global') &&
             !isGlobal
         ) {
             setIsGlobal(true);
@@ -37,8 +38,9 @@ const SearchResults = ({
             setToggleIsShow(true);
         }
         if (
-            new URLSearchParams(window.location.search).get('newsletter') ===
-                'public' &&
+            new URLSearchParams(window.location.search)
+                .get('newsletter')
+                .includes('public') &&
             !isPublic
         ) {
             setIsPublic(true);
@@ -46,8 +48,9 @@ const SearchResults = ({
             setToggleIsShow(false);
         }
         if (
-            new URLSearchParams(window.location.search).get('newsletter') ===
-                'private' &&
+            new URLSearchParams(window.location.search)
+                .get('newsletter')
+                .includes('private') &&
             !isPrivate
         ) {
             setIsPrivate(true);
