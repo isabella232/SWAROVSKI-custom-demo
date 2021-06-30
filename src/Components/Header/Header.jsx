@@ -26,8 +26,6 @@ const Header = ({
                     className="search-wrapper"
                     onClick={() => {
                         setSearchVisible(!searchVisible);
-                        setCatEyeGlasses(false);
-                        setCatSunglasses(false);
                     }}
                 >
                     <svg
