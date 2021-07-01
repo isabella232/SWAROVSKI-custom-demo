@@ -80,14 +80,9 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <QueryRuleContext
-                        trackedFilters={{
-                            segment: () => ['public'] // this tracks two static genre values,
-                        }}
-                    />
                     <Configure
                         analytics={false}
-                        ruleContexts={isPrivate ? [params] : ['private']}
+                        filters={'segment:public AND segment:private'}
                     />
                     <div className="search-switch">
                         {noParams ? (
@@ -126,7 +121,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     <QueryRuleContext />
                     <Configure
                         filters="segment:'public'"
-                        ruleContexts={isPublic ? [params] : ['public']}
+                        ruleContexts={[params]}
                     />
                     <div className="search-switch">
                         {noParams ? (
