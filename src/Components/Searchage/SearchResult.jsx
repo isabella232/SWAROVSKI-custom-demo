@@ -86,10 +86,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     {!isGlobal && !isPrivate ? (
                         ''
                     ) : (
-                        <Configure
-                            analytics={false}
-                            ruleContexts={['private']}
-                        />
+                        <Configure analytics={false} ruleContexts={[params]} />
                     )}
                     <div className="search-switch">
                         {noParams ? (
@@ -138,7 +135,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                         <Configure
                             analytics={false}
                             filters="segment:'public'"
-                            ruleContexts={['public']}
+                            ruleContexts={[params]}
                         />
                     )}
 
