@@ -84,7 +84,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     indexName="swarovski_customDemo_products"
                 >
                     {!isGlobal && !isPrivate ? (
-                        <Configure ruleContexts={'private'} />
+                        ''
                     ) : (
                         <Configure
                             analytics={false}
