@@ -87,7 +87,6 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                         <Configure
                             analytics={false}
                             filters={'segment:public OR segment:private'}
-                            ruleContexts={'private'}
                         />
                     ) : (
                         <Configure
@@ -137,7 +136,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                 >
                     <QueryRuleContext />
                     {!isGlobal && !isPublic ? (
-                        <Configure ruleContexts={'public'} />
+                        <Configure filters={'segment:public '} />
                     ) : (
                         <Configure
                             filters={'segment:public '}
