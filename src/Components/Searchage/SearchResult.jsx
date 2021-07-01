@@ -83,7 +83,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
         }
     }
 
-    return (
+        return (
         <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
             <InstantSearch
                 searchClient={searchClient}
