@@ -20,6 +20,8 @@ import CustomFilters from './Filters';
 import CustomSearchBar from './SearchBox';
 
 const SearchResults = ({ searchVisible, setSearchVisible }) => {
+    console.log(localStorage.getItem('query'));
+
     const searchClient = algoliasearch(window.appID, window.key);
     // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
@@ -32,9 +34,15 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
     const [params, setParams] = useState('');
 
     if (window.location.search) {
-        const params = new URLSearchParams(window.location.search).get(
+        const allParams = new URLSearchParams(window.location.search).get(
             'newsletter'
         );
+
+        if (params !== allParams) {
+            console.log(params, allParams);
+            setParams(allParams);
+        }
+
         if (
             new URLSearchParams(window.location.search)
                 .get('newsletter')
@@ -46,7 +54,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setChecked(false);
             setToggleIsShow(true);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -58,7 +66,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setSearchVisible(true);
             setToggleIsShow(false);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -71,109 +79,113 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setToggleIsShow(false);
             setChecked(true);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
     }
 
-    return (
+        return (
         <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
-            {checked ? (
-                <InstantSearch
-                    // ...
-                    searchClient={searchClient}
-                    indexName="swarovski_customDemo_products"
-                >
-                    {!isGlobal && !isPrivate ? (
-                        ''
-                    ) : (
-                        <Configure analytics={false} ruleContexts={[params]} />
-                    )}
-                    <div className="search-switch">
-                        {noParams ? (
-                            <div>
-                                <CustomSearchBar />
-                            </div>
-                        ) : (
-                            <CustomCurrentRefinements
-                                transformItems={items =>
-                                    items.filter(
-                                        item => item.attribute !== 'price'
-                                    )
-                                }
-                            />
-                        )}
-                        {toggleIsShow ? (
-                            <div className="switch-button">
-                                <h3>Access to private sale</h3>
-                                <SwitchExample
-                                    checked={checked}
-                                    setChecked={setChecked}
-                                />
-                            </div>
-                        ) : (
-                            ''
-                        )}
-                    </div>
-                    <div className="display-results">
-                        <CustomFilters filterAnim={filterAnim} />
-                        <CustomHitsPrivate />
-                    </div>
-                    <div className="pagination">
-                        <Pagination />
-                    </div>
-                </InstantSearch>
-            ) : (
-                <InstantSearch
-                    // ...
-                    searchClient={searchClient}
-                    indexName="swarovski_customDemo_products"
-                >
-                    <QueryRuleContext />
-                    {!isGlobal && !isPublic ? (
-                        <Configure filters={'segment:public '} />
-                    ) : (
-                        <Configure
-                            analytics={false}
-                            filters="segment:'public'"
-                            ruleContexts={[params]}
-                        />
-                    )}
+            <InstantSearch
+                searchClient={searchClient}
+                indexName="swarovski_customDemo_products"
+            >
+                <div className={`${isGlobal ? 'searchHidden' : 'searchShow'}`}>
+                    <CustomSearchBar />
+                </div>
 
-                    <div className="search-switch">
-                        {noParams ? (
-                            <div>
-                                <CustomSearchBar />
-                            </div>
+                {checked ? (
+                    <div>
+                        {!isGlobal && !isPrivate ? (
+                            ''
                         ) : (
-                            <CustomCurrentRefinements
-                                transformItems={items =>
-                                    items.filter(
-                                        item => item.attribute !== 'price'
-                                    )
-                                }
+                            <Configure
+                                analytics={false}
+                                ruleContexts={[params]}
                             />
                         )}
-                        {toggleIsShow ? (
-                            <div className="switch-button">
-                                <h3>Access to private sale</h3>
-                                <SwitchExample
-                                    checked={checked}
-                                    setChecked={setChecked}
+                        <div className="search-switch">
+                            {noParams ? (
+                                <div>{/* <CustomSearchBar /> */}</div>
+                            ) : (
+                                <CustomCurrentRefinements
+                                    transformItems={items =>
+                                        items.filter(
+                                            item => item.attribute !== 'price'
+                                        )
+                                    }
                                 />
-                            </div>
+                            )}
+                            {toggleIsShow ? (
+                                <div className="switch-button">
+                                    <h3>Access to private sale</h3>
+                                    <SwitchExample
+                                        checked={checked}
+                                        setChecked={setChecked}
+                                    />
+                                </div>
+                            ) : (
+                                ''
+                            )}
+                        </div>
+                        <div className="display-results">
+                            <CustomFilters filterAnim={filterAnim} />
+                            <CustomHitsPrivate />
+                        </div>
+                        <div className="pagination">
+                            <Pagination />
+                        </div>
+                    </div>
+                ) : (
+                    <div
+                        // ...
+                        searchClient={searchClient}
+                        indexName="swarovski_customDemo_products"
+                    >
+                        <QueryRuleContext />
+                        {!isGlobal && !isPublic ? (
+                            <Configure filters={'segment:public '} />
                         ) : (
-                            ''
+                            <Configure
+                                analytics={false}
+                                filters="segment:'public'"
+                                ruleContexts={[params]}
+                            />
                         )}
+
+                        <div className="search-switch">
+                            {noParams ? (
+                                <div>{/* <CustomSearchBar /> */}</div>
+                            ) : (
+                                <CustomCurrentRefinements
+                                    transformItems={items =>
+                                        items.filter(
+                                            item => item.attribute !== 'price'
+                                        )
+                                    }
+                                />
+                            )}
+                            {toggleIsShow ? (
+                                <div className="switch-button">
+                                    <h3>Access to private sale</h3>
+                                    <SwitchExample
+                                        checked={checked}
+                                        setChecked={setChecked}
+                                    />
+                                </div>
+                            ) : (
+                                ''
+                            )}
+                        </div>
+                        <div className="display-results">
+                            <CustomFilters filterAnim={filterAnim} />
+                            <CustomHits />
+                        </div>
+                        <div className="pagination">
+                            <Pagination />
+                        </div>
                     </div>
-                    <div className="display-results">
-                        <CustomFilters filterAnim={filterAnim} />
-                        <CustomHits />
-                    </div>
-                    <div className="pagination">
-                        <Pagination />
-                    </div>
-                </InstantSearch>
-            )}
+                )}
+            </InstantSearch>
         </div>
     );
 };
