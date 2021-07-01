@@ -87,8 +87,8 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                         <Configure ruleContexts={'private'} />
                     ) : (
                         <Configure
-                            filters={'segment:public OR segment:private'}
-                            ruleContexts={[params]}
+                            analytics={false}
+                            ruleContexts={['private']}
                         />
                     )}
                     <div className="search-switch">
@@ -136,8 +136,9 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                         <Configure filters={'segment:public '} />
                     ) : (
                         <Configure
-                            filters={'segment:public '}
-                            ruleContexts={[params]}
+                            analytics={false}
+                            filters="segment:'public'"
+                            ruleContexts={['public']}
                         />
                     )}
 
