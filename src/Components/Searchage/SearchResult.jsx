@@ -3,7 +3,15 @@ import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 
-import { InstantSearch, Pagination, Configure } from 'react-instantsearch-dom';
+import uniqBy from 'lodash.uniqby';
+
+import {
+    InstantSearch,
+    Pagination,
+    Configure,
+    QueryRuleContext,
+    connectCurrentRefinements
+} from 'react-instantsearch-dom';
 
 //COMPONENTS
 import CustomHits from './Hits';
@@ -11,13 +19,7 @@ import CustomHitsPrivate from './CustomHitsPrivate';
 import CustomFilters from './Filters';
 import CustomSearchBar from './SearchBox';
 
-const SearchResults = ({
-    selectedOption,
-    searchVisible,
-    catSunglasses,
-    catEyeGlasses,
-    setSearchVisible
-}) => {
+const SearchResults = ({ searchVisible, setSearchVisible }) => {
     const searchClient = algoliasearch(window.appID, window.key);
     // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
@@ -27,8 +29,12 @@ const SearchResults = ({
     const [isPrivate, setIsPrivate] = useState(false);
     const [toggleIsShow, setToggleIsShow] = useState(true);
     const [noParams, setNoParams] = useState(true);
+    const [params, setParams] = useState('');
 
     if (window.location.search) {
+        const params = new URLSearchParams(window.location.search).get(
+            'newsletter'
+        );
         if (
             new URLSearchParams(window.location.search)
                 .get('newsletter')
@@ -37,8 +43,10 @@ const SearchResults = ({
         ) {
             setIsGlobal(true);
             setSearchVisible(true);
-            setToggleIsShow(false);
+            setChecked(false);
+            setToggleIsShow(true);
             setNoParams(false);
+            setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -50,6 +58,7 @@ const SearchResults = ({
             setSearchVisible(true);
             setToggleIsShow(false);
             setNoParams(false);
+            setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -62,36 +71,43 @@ const SearchResults = ({
             setToggleIsShow(false);
             setChecked(true);
             setNoParams(false);
+            setParams(params);
         }
     }
 
     return (
-        <div
-            className={`container ${
-                searchVisible || catSunglasses || catEyeGlasses
-                    ? 'active'
-                    : 'hidden'
-            }`}
-        >
+        <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
             {checked ? (
                 <InstantSearch
                     // ...
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure
-                        analytics={false}
-                        ruleContexts={
-                            isGlobal ? ['private', 'global'] : ['private']
-                        }
-                    />
+                    {!isGlobal && !isPrivate ? (
+                        <Configure
+                            analytics={false}
+                            filters={'segment:public OR segment:private'}
+                            ruleContexts={'private'}
+                        />
+                    ) : (
+                        <Configure
+                            filters={'segment:public OR segment:private'}
+                            ruleContexts={[params]}
+                        />
+                    )}
                     <div className="search-switch">
                         {noParams ? (
                             <div>
                                 <CustomSearchBar />
                             </div>
                         ) : (
-                            ''
+                            <CustomCurrentRefinements
+                                transformItems={items =>
+                                    items.filter(
+                                        item => item.attribute !== 'price'
+                                    )
+                                }
+                            />
                         )}
                         {toggleIsShow ? (
                             <div className="switch-button">
@@ -119,19 +135,29 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure
-                        filters="segment:'public'"
-                        ruleContexts={
-                            isPrivate ? ['public', 'global'] : ['public']
-                        }
-                    />
+                    <QueryRuleContext />
+                    {!isGlobal && !isPublic ? (
+                        <Configure ruleContexts={'public'} />
+                    ) : (
+                        <Configure
+                            filters={'segment:public '}
+                            ruleContexts={[params]}
+                        />
+                    )}
+
                     <div className="search-switch">
                         {noParams ? (
                             <div>
                                 <CustomSearchBar />
                             </div>
                         ) : (
-                            ''
+                            <CustomCurrentRefinements
+                                transformItems={items =>
+                                    items.filter(
+                                        item => item.attribute !== 'price'
+                                    )
+                                }
+                            />
                         )}
                         {toggleIsShow ? (
                             <div className="switch-button">
@@ -170,5 +196,51 @@ const SwitchExample = ({ setChecked, checked }) => {
         </label>
     );
 };
+
+const CurrentRefinements = ({ items, refine }) => {
+    const unique = uniqBy(items, 'currentRefinement');
+
+    return (
+        <ul className="refinement-content">
+            {unique.map(item => (
+                <li className="refinement-item" key={item.label}>
+                    {item.items ? (
+                        <React.Fragment>
+                            <h3>{item.label}</h3>
+                            <ul className="refinement-results">
+                                {item.items.map(nested => (
+                                    <li key={nested.label}>
+                                        <a
+                                            className="refinement-filter"
+                                            href="#"
+                                            onClick={event => {
+                                                event.preventDefault();
+                                                refine(nested.value);
+                                            }}
+                                        >
+                                            {nested.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </React.Fragment>
+                    ) : (
+                        <a
+                            href="#"
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+};
+
+const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 
 export default SearchResults;
