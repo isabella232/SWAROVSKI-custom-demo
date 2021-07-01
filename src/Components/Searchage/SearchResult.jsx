@@ -3,11 +3,14 @@ import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 
+import uniqBy from 'lodash.uniqby';
+
 import {
     InstantSearch,
     Pagination,
     Configure,
-    QueryRuleContext
+    QueryRuleContext,
+    connectCurrentRefinements
 } from 'react-instantsearch-dom';
 
 //COMPONENTS
@@ -80,17 +83,31 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
-                    <Configure
-                        analytics={false}
-                        filters={'segment:public AND segment:private'}
-                    />
+                    {!isGlobal && !isPrivate ? (
+                        <Configure
+                            analytics={false}
+                            filters={'segment:public OR segment:private'}
+                            ruleContexts={'private'}
+                        />
+                    ) : (
+                        <Configure
+                            filters={'segment:public OR segment:private'}
+                            ruleContexts={[params]}
+                        />
+                    )}
                     <div className="search-switch">
                         {noParams ? (
                             <div>
                                 <CustomSearchBar />
                             </div>
                         ) : (
-                            ''
+                            <CustomCurrentRefinements
+                                transformItems={items =>
+                                    items.filter(
+                                        item => item.attribute !== 'price'
+                                    )
+                                }
+                            />
                         )}
                         {toggleIsShow ? (
                             <div className="switch-button">
@@ -119,17 +136,28 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     indexName="swarovski_customDemo_products"
                 >
                     <QueryRuleContext />
-                    <Configure
-                        filters="segment:'public'"
-                        ruleContexts={[params]}
-                    />
+                    {!isGlobal && !isPublic ? (
+                        <Configure ruleContexts={'public'} />
+                    ) : (
+                        <Configure
+                            filters={'segment:public '}
+                            ruleContexts={[params]}
+                        />
+                    )}
+
                     <div className="search-switch">
                         {noParams ? (
                             <div>
                                 <CustomSearchBar />
                             </div>
                         ) : (
-                            ''
+                            <CustomCurrentRefinements
+                                transformItems={items =>
+                                    items.filter(
+                                        item => item.attribute !== 'price'
+                                    )
+                                }
+                            />
                         )}
                         {toggleIsShow ? (
                             <div className="switch-button">
@@ -168,5 +196,51 @@ const SwitchExample = ({ setChecked, checked }) => {
         </label>
     );
 };
+
+const CurrentRefinements = ({ items, refine }) => {
+    const unique = uniqBy(items, 'currentRefinement');
+
+    return (
+        <ul className="refinement-content">
+            {unique.map(item => (
+                <li className="refinement-item" key={item.label}>
+                    {item.items ? (
+                        <React.Fragment>
+                            <h3>{item.label}</h3>
+                            <ul className="refinement-results">
+                                {item.items.map(nested => (
+                                    <li key={nested.label}>
+                                        <a
+                                            className="refinement-filter"
+                                            href="#"
+                                            onClick={event => {
+                                                event.preventDefault();
+                                                refine(nested.value);
+                                            }}
+                                        >
+                                            {nested.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </React.Fragment>
+                    ) : (
+                        <a
+                            href="#"
+                            onClick={event => {
+                                event.preventDefault();
+                                refine(item.value);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+};
+
+const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 
 export default SearchResults;
