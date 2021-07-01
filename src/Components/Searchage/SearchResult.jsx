@@ -3,7 +3,12 @@ import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 
-import { InstantSearch, Pagination, Configure } from 'react-instantsearch-dom';
+import {
+    InstantSearch,
+    Pagination,
+    Configure,
+    QueryRuleContext
+} from 'react-instantsearch-dom';
 
 //COMPONENTS
 import CustomHits from './Hits';
@@ -11,13 +16,7 @@ import CustomHitsPrivate from './CustomHitsPrivate';
 import CustomFilters from './Filters';
 import CustomSearchBar from './SearchBox';
 
-const SearchResults = ({
-    selectedOption,
-    searchVisible,
-    catSunglasses,
-    catEyeGlasses,
-    setSearchVisible
-}) => {
+const SearchResults = ({ searchVisible, setSearchVisible }) => {
     const searchClient = algoliasearch(window.appID, window.key);
     // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
@@ -27,8 +26,12 @@ const SearchResults = ({
     const [isPrivate, setIsPrivate] = useState(false);
     const [toggleIsShow, setToggleIsShow] = useState(true);
     const [noParams, setNoParams] = useState(true);
+    const [params, setParams] = useState('');
 
     if (window.location.search) {
+        const params = new URLSearchParams(window.location.search).get(
+            'newsletter'
+        );
         if (
             new URLSearchParams(window.location.search)
                 .get('newsletter')
@@ -37,8 +40,10 @@ const SearchResults = ({
         ) {
             setIsGlobal(true);
             setSearchVisible(true);
-            setToggleIsShow(false);
+            setChecked(false);
+            setToggleIsShow(true);
             setNoParams(false);
+            setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -50,6 +55,7 @@ const SearchResults = ({
             setSearchVisible(true);
             setToggleIsShow(false);
             setNoParams(false);
+            setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -62,28 +68,26 @@ const SearchResults = ({
             setToggleIsShow(false);
             setChecked(true);
             setNoParams(false);
+            setParams(params);
         }
     }
 
     return (
-        <div
-            className={`container ${
-                searchVisible || catSunglasses || catEyeGlasses
-                    ? 'active'
-                    : 'hidden'
-            }`}
-        >
+        <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
             {checked ? (
                 <InstantSearch
                     // ...
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
+                    <QueryRuleContext
+                        trackedFilters={{
+                            segment: () => ['public'] // this tracks two static genre values,
+                        }}
+                    />
                     <Configure
                         analytics={false}
-                        ruleContexts={
-                            isGlobal ? ['private', 'global'] : ['private']
-                        }
+                        ruleContexts={isPrivate ? [params] : ['private']}
                     />
                     <div className="search-switch">
                         {noParams ? (
@@ -119,11 +123,10 @@ const SearchResults = ({
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
                 >
+                    <QueryRuleContext />
                     <Configure
                         filters="segment:'public'"
-                        ruleContexts={
-                            isPrivate ? ['public', 'global'] : ['public']
-                        }
+                        ruleContexts={isPublic ? [params] : ['public']}
                     />
                     <div className="search-switch">
                         {noParams ? (
