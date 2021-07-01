@@ -83,20 +83,29 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
         }
     }
 
-        return (
+    return (
         <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
             <InstantSearch
                 searchClient={searchClient}
                 indexName="swarovski_customDemo_products"
             >
-                <div className={`${isGlobal ? 'searchHidden' : 'searchShow'}`}>
+                <div
+                    className={`${
+                        isGlobal || isPrivate || isPublic
+                            ? 'searchHidden'
+                            : 'searchShow'
+                    }`}
+                >
                     <CustomSearchBar />
                 </div>
 
                 {checked ? (
                     <div>
                         {!isGlobal && !isPrivate ? (
-                            ''
+                            <Configure
+                                analytics={false}
+                                ruleContexts={'private'}
+                            />
                         ) : (
                             <Configure
                                 analytics={false}
@@ -143,7 +152,10 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     >
                         <QueryRuleContext />
                         {!isGlobal && !isPublic ? (
-                            <Configure filters={'segment:public '} />
+                            <Configure
+                                filters="segment:'public'"
+                                ruleContexts={['public']}
+                            />
                         ) : (
                             <Configure
                                 analytics={false}
