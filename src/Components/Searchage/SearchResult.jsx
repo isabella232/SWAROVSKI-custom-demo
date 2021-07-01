@@ -20,6 +20,8 @@ import CustomFilters from './Filters';
 import CustomSearchBar from './SearchBox';
 
 const SearchResults = ({ searchVisible, setSearchVisible }) => {
+    console.log(localStorage.getItem('query'))
+
     const searchClient = algoliasearch(window.appID, window.key);
     // const searchClientPublic = algoliasearch(window.appID, window.keyPublic);
     const [filterAnim, setFilterAnim] = useState(true);
@@ -32,9 +34,15 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
     const [params, setParams] = useState('');
 
     if (window.location.search) {
-        const params = new URLSearchParams(window.location.search).get(
+        const allParams = new URLSearchParams(window.location.search).get(
             'newsletter'
         );
+
+        if(params !== allParams) {
+            console.log(params, allParams)
+            setParams(allParams)
+        }
+
         if (
             new URLSearchParams(window.location.search)
                 .get('newsletter')
@@ -46,7 +54,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setChecked(false);
             setToggleIsShow(true);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -58,7 +66,7 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setSearchVisible(true);
             setToggleIsShow(false);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
         if (
             new URLSearchParams(window.location.search)
@@ -71,30 +79,34 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
             setToggleIsShow(false);
             setChecked(true);
             setNoParams(false);
-            setParams(params);
+            // setParams(params);
         }
     }
 
     return (
         <div className={`container ${searchVisible ? 'active' : 'hidden'}`}>
+            <InstantSearch
+                searchClient={searchClient}
+                indexName="swarovski_customDemo_products"
+            >
+            <div>
+                <CustomSearchBar />
+            </div>
+            
             {checked ? (
-                <InstantSearch
-                    // ...
-                    searchClient={searchClient}
-                    indexName="swarovski_customDemo_products"
-                >
+              <div>
                     {!isGlobal && !isPrivate ? (
                         ''
                     ) : (
                         <Configure
                             analytics={false}
-                            ruleContexts={['private']}
+                            ruleContexts={['private', params]}
                         />
                     )}
                     <div className="search-switch">
                         {noParams ? (
                             <div>
-                                <CustomSearchBar />
+                                {/* <CustomSearchBar /> */}
                             </div>
                         ) : (
                             <CustomCurrentRefinements
@@ -124,9 +136,9 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     <div className="pagination">
                         <Pagination />
                     </div>
-                </InstantSearch>
+                </div>
             ) : (
-                <InstantSearch
+                <div
                     // ...
                     searchClient={searchClient}
                     indexName="swarovski_customDemo_products"
@@ -138,14 +150,14 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                         <Configure
                             analytics={false}
                             filters="segment:'public'"
-                            ruleContexts={['public']}
+                            ruleContexts={['public', params]}
                         />
                     )}
 
                     <div className="search-switch">
                         {noParams ? (
                             <div>
-                                <CustomSearchBar />
+                                {/* <CustomSearchBar /> */}
                             </div>
                         ) : (
                             <CustomCurrentRefinements
@@ -175,8 +187,9 @@ const SearchResults = ({ searchVisible, setSearchVisible }) => {
                     <div className="pagination">
                         <Pagination />
                     </div>
-                </InstantSearch>
+                </div>
             )}
+          </InstantSearch>
         </div>
     );
 };
