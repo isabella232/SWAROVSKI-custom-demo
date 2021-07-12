@@ -1,4 +1,4 @@
-# Svarovski-demo
+# Swarovski-demo
 
 _This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
 
@@ -19,4 +19,4 @@ yarn start
 ```
 
 Open http://localhost:3000 to see your app.
-# Svarovski-demo
+# Swarovski-demo
